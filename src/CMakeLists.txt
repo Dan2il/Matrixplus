@@ -1,15 +1,32 @@
-cmake_minimum_required(VERSION 2.8)
+# set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++17 -Wall -Werror -Wextra")
+cmake_minimum_required(VERSION 3.10.2)
 
-project(S21Matrix LANGUAGES CXX)
+project(S21Matrix)
+include(FetchContent)
+FetchContent_Declare(
+    googletest
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++17 -Wall -Werror -Wextra")
+    # Specify the commit you depend on and update it regularly.
+    URL https://github.com/google/googletest/archive/5376968f6948923e2411081fd9372e71a59d8e77.zip
+)
 
-set(SOURCE main_test.cpp)
+# For Windows: Prevent overriding the parent project's compiler/linker settings
+set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+FetchContent_MakeAvailable(googletest)
 
-set(SOURCE_LIB s21_matrix_oop.cpp)
+enable_testing()
 
-add_library(s21_matrix_oop STATIC ${SOURCE_LIB})
+add_library(s21_matrix_oop s21_matrix_oop/s21_matrix_oop.cpp s21_matrix_oop/s21_matrix_oop.h)
 
-add_executable(main ${SOURCE})
+add_executable(
+    s21_matrix_tests
+    tests/tests_constuctors.cpp
+)
+target_link_libraries(
+    s21_matrix_tests
+    s21_matrix_oop
+    GTest::gtest_main
+)
 
-target_link_libraries(main s21_matrix_oop)
+include(GoogleTest)
+gtest_discover_tests(s21_matrix_tests)
