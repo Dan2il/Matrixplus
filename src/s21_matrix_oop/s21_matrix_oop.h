@@ -1,18 +1,20 @@
 
 
 #include <algorithm>
+#include <cassert>
 #include <iostream>
 #include <list>
+#include <optional>
 
 class S21Matrix {
  public:
   S21Matrix();
-  S21Matrix(int rows, int cols);
-  //   S21Matrix(const S21Matrix& other);
+  explicit S21Matrix(const int rows, const int cols);
+  S21Matrix(const S21Matrix& other);
   //   S21Matrix(S21Matrix&& other);
 
-  int GetRows();
-  int GetCols();
+  int GetRows() const;
+  int GetCols() const;
 
   ~S21Matrix() = default;
 
