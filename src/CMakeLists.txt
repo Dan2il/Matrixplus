@@ -21,6 +21,7 @@ add_executable(
     s21_matrix_tests
     tests/tests_constuctors.cpp
     tests/func_for_test.cpp
+    tests/tests_methods.cpp
     tests/tests.h
 )
 
