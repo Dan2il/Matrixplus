@@ -1,4 +1,3 @@
-# set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++17 -Wall -Werror -Wextra")
 cmake_minimum_required(VERSION 3.10.2)
 
 project(S21Matrix)
@@ -9,7 +8,7 @@ FetchContent_Declare(
     # Specify the commit you depend on and update it regularly.
     URL https://github.com/google/googletest/archive/5376968f6948923e2411081fd9372e71a59d8e77.zip
 )
-
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++17 -Wall -Werror -Wextra")
 # For Windows: Prevent overriding the parent project's compiler/linker settings
 set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 FetchContent_MakeAvailable(googletest)
@@ -21,7 +20,10 @@ add_library(s21_matrix_oop s21_matrix_oop/s21_matrix_oop.cpp s21_matrix_oop/s21_
 add_executable(
     s21_matrix_tests
     tests/tests_constuctors.cpp
+    tests/func_for_test.cpp
+    tests/tests.h
 )
+
 target_link_libraries(
     s21_matrix_tests
     s21_matrix_oop
