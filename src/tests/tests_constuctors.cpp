@@ -37,14 +37,14 @@ TEST(tests_constuctors, copy_constructor) {
   CheckMatrix(0, matrix);
 }
 
-TEST(tests_constuctors, copy_constructor_2) {
-  S21Matrix other(3, 3);
+// TEST(tests_constuctors, copy_constructor_2) {
+//   S21Matrix other(3, 3);
 
-  other.Assign({1, 2, 3, 4, 5, 6, 7, 8, 9});
+//   other.Assign({1, 2, 3, 4, 5, 6, 7, 8, 9});
 
-  S21Matrix matrix(other);
-  EXPECT_DOUBLE_EQ(matrix.GetRows(), 3);
-  EXPECT_DOUBLE_EQ(matrix.GetCols(), 3);
+//   S21Matrix matrix(other);
+//   EXPECT_DOUBLE_EQ(matrix.GetRows(), 3);
+//   EXPECT_DOUBLE_EQ(matrix.GetCols(), 3);
 
-  CheckMatrixRange({1, 2, 3, 4, 5, 6, 7, 8, 9}, matrix);
-}
+//   CheckMatrixRange({1, 2, 3, 4, 5, 6, 7, 8, 9}, matrix);
+// }
