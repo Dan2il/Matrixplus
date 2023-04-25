@@ -1,6 +1,7 @@
 #include "s21_matrix_oop.h"
 
-S21Matrix::S21Matrix() : rows_(1), cols_(1) {}
+S21Matrix::S21Matrix()
+    : rows_(1), cols_(1), matrix_(1, std::vector<double>(1, 0)) {}
 
 S21Matrix::S21Matrix(const int rows, const int cols)
     : rows_(rows), cols_(cols) {
@@ -37,10 +38,11 @@ void S21Matrix::Assign(std::vector<double> data) {
   int counter_cols = 0;
   std::vector<std::vector<double>> matrix(rows_, std::vector<double>(cols_, 0));
   for (double num : data) {
-    matrix.at(counter_rows++).at(counter_cols++) = num;
-    if (counter_rows == rows_) {
-      counter_rows = 0;
-      if (counter_cols == cols_) {
+    matrix.at(counter_rows).at(counter_cols++) = num;
+    if (counter_cols == cols_) {
+      counter_cols = 0;
+      counter_rows++;
+      if (counter_rows >= rows_) {
         break;
       }
     }
