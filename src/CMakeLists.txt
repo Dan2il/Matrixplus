@@ -9,6 +9,7 @@ FetchContent_Declare(
     URL https://github.com/google/googletest/archive/5376968f6948923e2411081fd9372e71a59d8e77.zip
 )
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++17 -Wall -Werror -Wextra")
+
 # For Windows: Prevent overriding the parent project's compiler/linker settings
 set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 FetchContent_MakeAvailable(googletest)
@@ -21,7 +22,8 @@ add_executable(
     s21_matrix_tests
     tests/tests_constuctors.cpp
     tests/func_for_test.cpp
-    tests/tests_methods.cpp
+    tests/tests_methods_assign.cpp
+    tests/tests_operators.cpp
     tests/tests.h
 )
 
