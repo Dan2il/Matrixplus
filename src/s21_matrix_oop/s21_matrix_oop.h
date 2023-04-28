@@ -8,8 +8,6 @@
 
 class S21Matrix {
  public:
-  double operator()(const size_t i, const size_t j);
-
   S21Matrix();
   explicit S21Matrix(const int rows, const int cols);
   S21Matrix(const int rows, const int cols, std::vector<double> data);
@@ -18,8 +16,24 @@ class S21Matrix {
 
   void Assign(std::vector<double> data);
 
+  bool EqMatrix(const S21Matrix& other);
+
+  // void SumMatrix(const S21Matrix& other);
+  // void SubMatrix(const S21Matrix& other);
+  // void MulNumber(const double num);
+  // void MulMatrix(const S21Matrix& other);
+
+  // S21Matrix Transpose();
+  // S21Matrix CalcComplements();
+  // double Determinant();
+  // S21Matrix InverseMatrix();
+
   int GetRows() const;
   int GetCols() const;
+
+  double operator()(const size_t i, const size_t j);
+  std::vector<double> operator[](size_t num);
+  const std::vector<double> operator[](size_t num) const;
 
   ~S21Matrix() = default;
 

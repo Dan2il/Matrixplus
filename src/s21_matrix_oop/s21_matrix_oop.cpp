@@ -42,12 +42,23 @@ void S21Matrix::Assign(std::vector<double> data) {
     if (counter_cols == cols_) {
       counter_cols = 0;
       counter_rows++;
-      if (counter_rows >= rows_) {
-        break;
-      }
+    }
+    if (counter_rows >= rows_) {
+      break;
     }
   }
   std::swap(matrix_, matrix);
+}
+
+bool S21Matrix::EqMatrix(const S21Matrix& other) {
+  bool result = true;
+  if (rows_ == other.GetRows() && cols_ == other.GetCols()) {
+    for (int index = 0; index < rows_ && result == true; ++index) {
+      result = std::equal(matrix_[index].begin(), matrix_[index].end(),
+                          other[index].begin());
+    }
+  }
+  return result;
 }
 
 void S21Matrix::CheckCorrectRowsAndCols() {
@@ -60,4 +71,12 @@ void S21Matrix::CheckCorrectRowsAndCols() {
 double S21Matrix::operator()(const size_t i, const size_t j) {
   // добавить проверку исключений
   return matrix_.at(i).at(j);
+}
+
+std::vector<double> S21Matrix::operator[](size_t num) {
+  return matrix_.at(num);
+}
+
+const std::vector<double> S21Matrix::operator[](size_t num) const {
+  return matrix_.at(num);
 }
