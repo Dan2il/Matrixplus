@@ -25,7 +25,8 @@ TEST(tests_constuctors, simple_argument_2) {
 TEST(tests_constuctors, uncorrect_argument) {
   EXPECT_ANY_THROW(CreateMatrix(-5, 25));
   EXPECT_ANY_THROW(CreateMatrix(0, 25));
-  EXPECT_NO_THROW(CreateMatrix(24, 25));
+  EXPECT_ANY_THROW(CreateMatrix(24, 0));
+  // подать числа больше int
 }
 
 TEST(tests_constuctors, copy_constructor) {
@@ -35,16 +36,18 @@ TEST(tests_constuctors, copy_constructor) {
   EXPECT_DOUBLE_EQ(matrix.GetCols(), 6);
 
   CheckMatrix(0, matrix);
+
+  EXPECT_TRUE(matrix.EqMatrix(other));
+  EXPECT_TRUE(other.EqMatrix(matrix));
 }
 
-// TEST(tests_constuctors, copy_constructor_2) {
-//   S21Matrix other(3, 3);
+TEST(tests_constuctors, copy_constructor_2) {
+  S21Matrix other(3, 3);
+  other.Assign({1, 2, 3, 4, 5, 6, 7, 8, 9});
+  S21Matrix matrix(other);
+  EXPECT_DOUBLE_EQ(matrix.GetRows(), 3);
+  EXPECT_DOUBLE_EQ(matrix.GetCols(), 3);
 
-//   other.Assign({1, 2, 3, 4, 5, 6, 7, 8, 9});
-
-//   S21Matrix matrix(other);
-//   EXPECT_DOUBLE_EQ(matrix.GetRows(), 3);
-//   EXPECT_DOUBLE_EQ(matrix.GetCols(), 3);
-
-//   CheckMatrixRange({1, 2, 3, 4, 5, 6, 7, 8, 9}, matrix);
-// }
+  EXPECT_TRUE(matrix.EqMatrix(other));
+  EXPECT_TRUE(other.EqMatrix(matrix));
+}
