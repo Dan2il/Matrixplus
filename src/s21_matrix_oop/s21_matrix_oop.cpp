@@ -51,14 +51,23 @@ void S21Matrix::Assign(std::vector<double> data) {
 }
 
 bool S21Matrix::EqMatrix(const S21Matrix& other) {
-  bool result = true;
-  if (rows_ == other.GetRows() && cols_ == other.GetCols()) {
-    for (int index = 0; index < rows_ && result == true; ++index) {
-      result = std::equal(matrix_[index].begin(), matrix_[index].end(),
-                          other[index].begin());
-    }
+  bool result = EqSizeMatrix(other);
+  for (int index = 0; index < rows_ && result == true; ++index) {
+    result = std::equal(matrix_[index].begin(), matrix_[index].end(),
+                        other[index].begin());
   }
   return result;
+}
+
+void S21Matrix::SumMatrix(const S21Matrix& other) {
+  if (EqSizeMatrix(other)) {
+    for (size_t index_row = 0; index_row < matrix_.size(); ++index_row) {
+      for (size_t index_col = 0; index_col < matrix_.at(index_row).size();
+           ++index_col) {
+        matrix_.at(index_row).at(index_col) += other(index_row, index_col);
+      }
+    }
+  }
 }
 
 void S21Matrix::CheckCorrectRowsAndCols() {
@@ -68,7 +77,20 @@ void S21Matrix::CheckCorrectRowsAndCols() {
   }
 }
 
+bool S21Matrix::EqSizeMatrix(const S21Matrix& other) {
+  bool result = false;
+  if (rows_ == other.GetRows() && cols_ == other.GetCols()) {
+    result = true;
+  }
+  return result;
+}
+
 double S21Matrix::operator()(const size_t i, const size_t j) {
+  // добавить проверку исключений
+  return matrix_.at(i).at(j);
+}
+
+double S21Matrix::operator()(const size_t i, const size_t j) const {
   // добавить проверку исключений
   return matrix_.at(i).at(j);
 }

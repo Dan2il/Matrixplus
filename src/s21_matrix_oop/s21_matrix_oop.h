@@ -18,7 +18,7 @@ class S21Matrix {
 
   bool EqMatrix(const S21Matrix& other);
 
-  // void SumMatrix(const S21Matrix& other);
+  void SumMatrix(const S21Matrix& other);
   // void SubMatrix(const S21Matrix& other);
   // void MulNumber(const double num);
   // void MulMatrix(const S21Matrix& other);
@@ -32,6 +32,7 @@ class S21Matrix {
   int GetCols() const;
 
   double operator()(const size_t i, const size_t j);
+  double operator()(const size_t i, const size_t j) const;
   std::vector<double> operator[](size_t num);
   const std::vector<double> operator[](size_t num) const;
 
@@ -44,4 +45,5 @@ class S21Matrix {
   std::vector<std::vector<double>> matrix_;
 
   void CheckCorrectRowsAndCols();
+  bool EqSizeMatrix(const S21Matrix& other);
 };
