@@ -80,13 +80,44 @@ bool S21Matrix::EqMatrix(const S21Matrix& other) {
 
 void S21Matrix::SumMatrix(const S21Matrix& other) {
   if (EqSizeMatrix(other)) {
-    for (size_t index_row = 0; index_row < matrix_.size(); ++index_row) {
-      for (size_t index_col = 0; index_col < matrix_.at(index_row).size();
-           ++index_col) {
-        matrix_.at(index_row).at(index_col) += other(index_row, index_col);
-      }
+    ForEachMatrix(other, [](double n1, double n2) { return n1 + n2; });
+  }
+}
+
+void S21Matrix::SubMatrix(const S21Matrix& other) {
+  if (EqSizeMatrix(other)) {
+    ForEachMatrix(other, [](double n1, double n2) { return n1 - n2; });
+  }
+}
+
+void S21Matrix::MulNumber(const double num) {
+  ForEachMatrix([num](double n1) { return n1 * num; });
+}
+
+template <typename Function>
+void S21Matrix::ForEachMatrix(const S21Matrix& other, Function func) {
+  std::vector<std::vector<double>> matrix(rows_, std::vector<double>(cols_, 0));
+  for (size_t index_row = 0; index_row < matrix.size(); ++index_row) {
+    for (size_t index_col = 0; index_col < matrix.at(index_row).size();
+         ++index_col) {
+      matrix.at(index_row).at(index_col) = func(
+          matrix_.at(index_row).at(index_col), other(index_row, index_col));
     }
   }
+  std::swap(matrix_, matrix);
+}
+
+template <typename Function>
+void S21Matrix::ForEachMatrix(Function func) {
+  std::vector<std::vector<double>> matrix(rows_, std::vector<double>(cols_, 0));
+  for (size_t index_row = 0; index_row < matrix.size(); ++index_row) {
+    for (size_t index_col = 0; index_col < matrix.at(index_row).size();
+         ++index_col) {
+      matrix.at(index_row).at(index_col) =
+          func(matrix_.at(index_row).at(index_col));
+    }
+  }
+  std::swap(matrix_, matrix);
 }
 
 void S21Matrix::CheckCorrectRowsAndCols() {

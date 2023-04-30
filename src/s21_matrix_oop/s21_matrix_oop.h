@@ -22,8 +22,8 @@ class S21Matrix {
   bool EqMatrix(const S21Matrix& other);
 
   void SumMatrix(const S21Matrix& other);
-  // void SubMatrix(const S21Matrix& other);
-  // void MulNumber(const double num);
+  void SubMatrix(const S21Matrix& other);
+  void MulNumber(const double num);
   // void MulMatrix(const S21Matrix& other);
 
   // S21Matrix Transpose();
@@ -33,6 +33,12 @@ class S21Matrix {
 
   int GetRows() const;
   int GetCols() const;
+
+  template <typename Function>
+  void ForEachMatrix(const S21Matrix& other, Function func);
+
+  template <typename Function>
+  void ForEachMatrix(Function func);
 
   double operator()(const size_t i, const size_t j);
   double operator()(const size_t i, const size_t j) const;
