@@ -33,7 +33,7 @@ S21Matrix::S21Matrix(S21Matrix&& other)
 int S21Matrix::GetRows() const { return rows_; }
 int S21Matrix::GetCols() const { return cols_; }
 
-void S21Matrix::Assign(std::vector<double> data) {
+S21Matrix& S21Matrix::Assign(const std::vector<double>& data) {
   int counter_rows = 0;
   int counter_cols = 0;
   std::vector<std::vector<double>> matrix(rows_, std::vector<double>(cols_, 0));
@@ -48,6 +48,25 @@ void S21Matrix::Assign(std::vector<double> data) {
     }
   }
   std::swap(matrix_, matrix);
+  return *this;
+}
+
+S21Matrix& S21Matrix::Assign(const double num) {
+  std::vector<std::vector<double>> matrix(rows_, std::vector<double>(cols_, 0));
+  for (size_t index_row = 0; index_row < matrix.size(); ++index_row) {
+    for (size_t index_col = 0; index_col < matrix.at(index_row).size();
+         ++index_col) {
+      matrix.at(index_row).at(index_col) = num;
+    }
+  }
+  std::swap(matrix_, matrix);
+  return *this;
+}
+
+S21Matrix& S21Matrix::Assign(const size_t index_row, const size_t index_col,
+                             const double num) {
+  matrix_.at(index_row).at(index_col) = num;
+  return *this;
 }
 
 bool S21Matrix::EqMatrix(const S21Matrix& other) {
@@ -86,12 +105,10 @@ bool S21Matrix::EqSizeMatrix(const S21Matrix& other) {
 }
 
 double S21Matrix::operator()(const size_t i, const size_t j) {
-  // добавить проверку исключений
   return matrix_.at(i).at(j);
 }
 
 double S21Matrix::operator()(const size_t i, const size_t j) const {
-  // добавить проверку исключений
   return matrix_.at(i).at(j);
 }
 
