@@ -26,6 +26,7 @@ add_executable(
     tests/tests_operators.cpp
     tests/tests_methods_eqmatrix.cpp
     tests/tests_methods_summatrix.cpp
+    tests/tests_methods_submatrix.cpp
     tests/tests.h
 )
 
