@@ -34,20 +34,23 @@ int S21Matrix::GetRows() const { return rows_; }
 int S21Matrix::GetCols() const { return cols_; }
 
 S21Matrix& S21Matrix::Assign(const std::vector<double>& data) {
-  int counter_rows = 0;
-  int counter_cols = 0;
-  std::vector<std::vector<double>> matrix(rows_, std::vector<double>(cols_, 0));
-  for (double num : data) {
-    matrix.at(counter_rows).at(counter_cols++) = num;
-    if (counter_cols == cols_) {
-      counter_cols = 0;
-      counter_rows++;
+  if (!data.empty()) {
+    int counter_rows = 0;
+    int counter_cols = 0;
+    std::vector<std::vector<double>> matrix(rows_,
+                                            std::vector<double>(cols_, 0));
+    for (double num : data) {
+      matrix.at(counter_rows).at(counter_cols++) = num;
+      if (counter_cols == cols_) {
+        counter_cols = 0;
+        counter_rows++;
+      }
+      if (counter_rows >= rows_) {
+        break;
+      }
     }
-    if (counter_rows >= rows_) {
-      break;
-    }
+    std::swap(matrix_, matrix);
   }
-  std::swap(matrix_, matrix);
   return *this;
 }
 
@@ -92,6 +95,28 @@ void S21Matrix::SubMatrix(const S21Matrix& other) {
 
 void S21Matrix::MulNumber(const double num) {
   ForEachMatrix([num](double n1) { return n1 * num; });
+}
+
+void S21Matrix::MulMatrix(const S21Matrix& other) {
+  if (cols_ == other.GetRows()) {
+    std::vector<std::vector<double>> matrix(
+        rows_, std::vector<double>(other.GetCols(), 0));
+    for (size_t index_row = 0; index_row < matrix.size(); ++index_row) {
+      for (size_t index_col = 0; index_col < matrix.at(index_row).size();
+           ++index_col) {
+        double num = 0;
+        for (int k = 0; k < cols_; ++k) {
+          num += matrix_.at(index_row).at(k) * other(k, index_col);
+        }
+        matrix.at(index_row).at(index_col) = num;
+      }
+    }
+    cols_ = other.GetCols();
+    for (size_t index_row = 0; index_row < matrix.size(); ++index_row) {
+      matrix_.at(index_row).resize(other.GetCols());
+    }
+    std::swap(matrix_, matrix);
+  }
 }
 
 template <typename Function>
