@@ -19,6 +19,8 @@ class S21Matrix {
   S21Matrix& Assign(const size_t index_row, const size_t index_col,
                     const double num);
 
+  S21Matrix& Erace(const int row, const int col);
+
   bool EqMatrix(const S21Matrix& other);
 
   void SumMatrix(const S21Matrix& other);
@@ -26,11 +28,12 @@ class S21Matrix {
   void MulNumber(const double num);
   void MulMatrix(const S21Matrix& other);
 
-  // S21Matrix Transpose();
+  S21Matrix Transpose();
+  double Determinant();
   // S21Matrix CalcComplements();
-  // double Determinant();
   // S21Matrix InverseMatrix();
 
+  S21Matrix GetMinorMatrix(const int rows, const int columns);
   int GetRows() const;
   int GetCols() const;
 

@@ -72,6 +72,21 @@ S21Matrix& S21Matrix::Assign(const size_t index_row, const size_t index_col,
   return *this;
 }
 
+S21Matrix& S21Matrix::Erace(const int row, const int col) {
+  if (row < 0 || col < 0 || row >= rows_ || col >= cols_) {
+    throw std::invalid_argument("Uncorect row or col");
+  }
+
+  for (int index_row = 0; index_row < rows_; ++index_row) {
+    matrix_.at(index_row).erase(matrix_.at(index_row).begin() + col);
+  }
+
+  matrix_.erase(matrix_.begin() + row);
+  --rows_;
+  --cols_;
+  return *this;
+}
+
 bool S21Matrix::EqMatrix(const S21Matrix& other) {
   bool result = EqSizeMatrix(other);
   for (int index = 0; index < rows_ && result == true; ++index) {
@@ -121,6 +136,62 @@ void S21Matrix::MulMatrix(const S21Matrix& other) {
         "The number of columns of the first matrix is not equal to the number "
         "of rows of the second matrix");
   }
+}
+
+S21Matrix S21Matrix::Transpose() {
+  S21Matrix result(cols_, rows_);
+  for (size_t index_row = 0; index_row < matrix_.size(); ++index_row) {
+    for (size_t index_col = 0; index_col < matrix_.at(index_row).size();
+         ++index_col) {
+      result.Assign(index_col, index_row, matrix_.at(index_row).at(index_col));
+    }
+  }
+  return result;
+}
+
+// double S21Matrix::Determinant() {
+// double result = 0;
+// if (cols_ != rows_) {
+//   throw std::invalid_argument("The matrix is not square");
+// } else if (rows_ == 1) {
+//   result = matrix_.at(0).at(0);
+// } else if (rows_ == 2) {
+//   result = matrix_.at(0).at(0) * matrix_.at(1).at(1) -
+//            matrix_.at(0).at(1) * matrix_.at(1).at(0);
+// } else {
+//   int degree = 1;
+//   for (int counter_columns = 0; counter_columns < cols_;
+//        ++counter_columns) {
+//     //
+//   }
+// }
+
+// else {
+//   int degree = 1;
+//   *result = 0;
+//   for (int counter_columns = 0; counter_columns < A->columns;
+//        ++counter_columns) {
+//     double recursion_result = 0;
+//     matrix_t recursion_matrix;
+//     error_type = GetMinorMatrix(0, counter_columns, &recursion_matrix, A);
+//     if (error_type == NO_ERRORS) {
+//       error_type = s21_determinant(&recursion_matrix, &recursion_result);
+//       if (error_type == NO_ERRORS) {
+//         *result += degree * A->matrix[0][counter_columns] *
+//         recursion_result; degree = -degree;
+//       }
+//     }
+//     s21_remove_matrix(&recursion_matrix);
+//   }
+// }
+// return error_type;
+// }
+
+S21Matrix S21Matrix::GetMinorMatrix(const int rows, const int columns) {
+  if (rows < 0 || columns < 0 || rows >= rows_ || columns >= cols_) {
+    throw std::invalid_argument("Uncorect row or col");
+  }
+  return S21Matrix(*this).Erace(rows, columns);
 }
 
 template <typename Function>
