@@ -149,43 +149,43 @@ S21Matrix S21Matrix::Transpose() {
   return result;
 }
 
-// double S21Matrix::Determinant() {
-// double result = 0;
-// if (cols_ != rows_) {
-//   throw std::invalid_argument("The matrix is not square");
-// } else if (rows_ == 1) {
-//   result = matrix_.at(0).at(0);
-// } else if (rows_ == 2) {
-//   result = matrix_.at(0).at(0) * matrix_.at(1).at(1) -
-//            matrix_.at(0).at(1) * matrix_.at(1).at(0);
-// } else {
-//   int degree = 1;
-//   for (int counter_columns = 0; counter_columns < cols_;
-//        ++counter_columns) {
-//     //
-//   }
-// }
+double S21Matrix::Determinant() {
+  double result = 0;
+  if (cols_ != rows_) {
+    throw std::invalid_argument("The matrix is not square");
+  } else if (rows_ == 1) {
+    result = matrix_.at(0).at(0);
+  } else if (rows_ == 2) {
+    result = matrix_.at(0).at(0) * matrix_.at(1).at(1) -
+             matrix_.at(0).at(1) * matrix_.at(1).at(0);
+  } else {
+    int degree = 1;
+    for (int counter_columns = 0; counter_columns < cols_; ++counter_columns) {
+      double recursion_result = 0;
+      S21Matrix rec_matrix;
+    }
+  }
 
-// else {
-//   int degree = 1;
-//   *result = 0;
-//   for (int counter_columns = 0; counter_columns < A->columns;
-//        ++counter_columns) {
-//     double recursion_result = 0;
-//     matrix_t recursion_matrix;
-//     error_type = GetMinorMatrix(0, counter_columns, &recursion_matrix, A);
-//     if (error_type == NO_ERRORS) {
-//       error_type = s21_determinant(&recursion_matrix, &recursion_result);
-//       if (error_type == NO_ERRORS) {
-//         *result += degree * A->matrix[0][counter_columns] *
-//         recursion_result; degree = -degree;
-//       }
-//     }
-//     s21_remove_matrix(&recursion_matrix);
-//   }
-// }
-// return error_type;
-// }
+  else {
+    int degree = 1;
+    *result = 0;
+    for (int counter_columns = 0; counter_columns < A->columns;
+         ++counter_columns) {
+      double recursion_result = 0;
+      matrix_t recursion_matrix;
+      error_type = GetMinorMatrix(0, counter_columns, &recursion_matrix, A);
+      if (error_type == NO_ERRORS) {
+        error_type = s21_determinant(&recursion_matrix, &recursion_result);
+        if (error_type == NO_ERRORS) {
+          *result += degree * A->matrix[0][counter_columns] * recursion_result;
+          degree = -degree;
+        }
+      }
+      s21_remove_matrix(&recursion_matrix);
+    }
+  }
+  return error_type;
+}
 
 S21Matrix S21Matrix::GetMinorMatrix(const int rows, const int columns) {
   if (rows < 0 || columns < 0 || rows >= rows_ || columns >= cols_) {
