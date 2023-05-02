@@ -116,6 +116,10 @@ void S21Matrix::MulMatrix(const S21Matrix& other) {
       matrix_.at(index_row).resize(other.GetCols());
     }
     std::swap(matrix_, matrix);
+  } else {
+    throw std::invalid_argument(
+        "The number of columns of the first matrix is not equal to the number "
+        "of rows of the second matrix");
   }
 }
 
