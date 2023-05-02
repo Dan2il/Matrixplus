@@ -29,6 +29,8 @@ add_executable(
     tests/tests_methods_submatrix.cpp
     tests/tests_methods_multnumber.cpp
     tests/tests_methods_multmatrix.cpp
+    tests/tests_methods_transpose.cpp
+    tests/tests_methods_minor_matrix.cpp
     tests/tests.h
 )
 
