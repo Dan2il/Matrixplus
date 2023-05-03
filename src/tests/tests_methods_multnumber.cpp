@@ -28,6 +28,8 @@ TEST(tests_methods_mult_matrix_number, correct_arg_2) {
     }
   }
 
+  matrix.MulNumber(value2);
+
   EXPECT_TRUE(matrix.EqMatrix(result));
   EXPECT_TRUE(result.EqMatrix(matrix));
 }
