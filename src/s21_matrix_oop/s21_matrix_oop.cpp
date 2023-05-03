@@ -130,7 +130,9 @@ void S21Matrix::MulMatrix(const S21Matrix& other) {
     for (size_t index_row = 0; index_row < matrix.size(); ++index_row) {
       matrix_.at(index_row).resize(other.GetCols());
     }
-    std::swap(matrix_, matrix);
+    matrix_ = std::move(matrix);
+    cols_ = other.GetCols();
+
   } else {
     throw std::invalid_argument(
         "The number of columns of the first matrix is not equal to the number "
@@ -161,30 +163,13 @@ double S21Matrix::Determinant() {
   } else {
     int degree = 1;
     for (int counter_columns = 0; counter_columns < cols_; ++counter_columns) {
-      double recursion_result = 0;
-      S21Matrix rec_matrix;
+      S21Matrix rec_matrix = GetMinorMatrix(0, counter_columns);
+      double recursion_result = rec_matrix.Determinant();
+      result += degree * matrix_.at(0).at(counter_columns) * recursion_result;
+      degree = -degree;
     }
   }
-
-  else {
-    int degree = 1;
-    *result = 0;
-    for (int counter_columns = 0; counter_columns < A->columns;
-         ++counter_columns) {
-      double recursion_result = 0;
-      matrix_t recursion_matrix;
-      error_type = GetMinorMatrix(0, counter_columns, &recursion_matrix, A);
-      if (error_type == NO_ERRORS) {
-        error_type = s21_determinant(&recursion_matrix, &recursion_result);
-        if (error_type == NO_ERRORS) {
-          *result += degree * A->matrix[0][counter_columns] * recursion_result;
-          degree = -degree;
-        }
-      }
-      s21_remove_matrix(&recursion_matrix);
-    }
-  }
-  return error_type;
+  return result;
 }
 
 S21Matrix S21Matrix::GetMinorMatrix(const int rows, const int columns) {
@@ -217,7 +202,7 @@ void S21Matrix::ForEachMatrix(Function func) {
           func(matrix_.at(index_row).at(index_col));
     }
   }
-  std::swap(matrix_, matrix);
+  matrix_ = std::move(matrix);
 }
 
 void S21Matrix::CheckCorrectRowsAndCols() {
