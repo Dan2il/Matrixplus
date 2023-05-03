@@ -33,6 +33,7 @@ add_executable(
     tests/tests_methods_minor_matrix.cpp
     tests/tests_determinant.cpp
     tests/tests_calccomplements.cpp
+    tests/tests_inversematrix.cpp
     tests/tests.h
 )
 
