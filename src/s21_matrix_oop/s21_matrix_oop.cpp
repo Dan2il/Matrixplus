@@ -194,6 +194,22 @@ S21Matrix S21Matrix::CalcComplements() {
   return buffer_result;
 }
 
+S21Matrix S21Matrix::InverseMatrix() {
+  double determinant = Determinant();
+  if (!determinant) {
+    throw std::invalid_argument("Matrix determinant is 0");
+  }
+  S21Matrix result;
+  // if (rows_ == 1) {
+  //   result.Assign(1 / matrix_.at(0).at(0));
+  // } else {
+  S21Matrix calc_complements = CalcComplements();
+  S21Matrix transpose = calc_complements.Transpose();
+  transpose.MulNumber(1.00 / determinant);
+  // }
+  return transpose;
+}
+
 S21Matrix S21Matrix::GetMinorMatrix(const int rows, const int columns) {
   if (rows < 0 || columns < 0 || rows >= rows_ || columns >= cols_) {
     throw std::invalid_argument("Uncorect row or col");

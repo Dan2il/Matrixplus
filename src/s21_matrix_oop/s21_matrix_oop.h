@@ -32,7 +32,7 @@ class S21Matrix {
   S21Matrix Transpose();
   double Determinant();
   S21Matrix CalcComplements();
-  // S21Matrix InverseMatrix();
+  S21Matrix InverseMatrix();
 
   S21Matrix GetMinorMatrix(const int rows, const int columns);
   int GetRows() const;
