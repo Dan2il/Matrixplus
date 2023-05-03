@@ -172,6 +172,28 @@ double S21Matrix::Determinant() {
   return result;
 }
 
+S21Matrix S21Matrix::CalcComplements() {
+  if (rows_ != cols_) {
+    throw std::invalid_argument("The matrix is not square");
+  }
+  S21Matrix buffer_result(rows_, cols_);
+  if (rows_ == 1) {
+    buffer_result.Assign(matrix_.at(0).at(0));
+  } else {
+    for (size_t index_row = 0; index_row < matrix_.size(); ++index_row) {
+      for (size_t index_col = 0; index_col < matrix_.at(index_row).size();
+           ++index_col) {
+        S21Matrix minor = GetMinorMatrix(index_row, index_col);
+        double determinant = minor.Determinant();
+        buffer_result.Assign(
+            index_row, index_col,
+            determinant * std::pow(-1, index_row + 1 + index_col + 1));
+      }
+    }
+  }
+  return buffer_result;
+}
+
 S21Matrix S21Matrix::GetMinorMatrix(const int rows, const int columns) {
   if (rows < 0 || columns < 0 || rows >= rows_ || columns >= cols_) {
     throw std::invalid_argument("Uncorect row or col");

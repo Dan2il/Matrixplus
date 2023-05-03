@@ -2,6 +2,7 @@
 
 #include <algorithm>
 #include <cassert>
+#include <cmath>
 #include <iostream>
 #include <optional>
 #include <vector>
@@ -30,7 +31,7 @@ class S21Matrix {
 
   S21Matrix Transpose();
   double Determinant();
-  // S21Matrix CalcComplements();
+  S21Matrix CalcComplements();
   // S21Matrix InverseMatrix();
 
   S21Matrix GetMinorMatrix(const int rows, const int columns);
