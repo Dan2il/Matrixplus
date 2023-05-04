@@ -100,15 +100,17 @@ bool S21Matrix::EqMatrix(const S21Matrix& other) {
 }
 
 void S21Matrix::SumMatrix(const S21Matrix& other) {
-  if (EqSizeMatrix(other)) {
-    ForEachMatrix(other, [](double n1, double n2) { return n1 + n2; });
+  if (!EqSizeMatrix(other)) {
+    throw std::invalid_argument("Different matrix dimensions");
   }
+  ForEachMatrix(other, [](double n1, double n2) { return n1 + n2; });
 }
 
 void S21Matrix::SubMatrix(const S21Matrix& other) {
-  if (EqSizeMatrix(other)) {
-    ForEachMatrix(other, [](double n1, double n2) { return n1 - n2; });
+  if (!EqSizeMatrix(other)) {
+    throw std::invalid_argument("Different matrix dimensions");
   }
+  ForEachMatrix(other, [](double n1, double n2) { return n1 - n2; });
 }
 
 void S21Matrix::MulNumber(const double num) {
@@ -282,3 +284,13 @@ S21Matrix S21Matrix::operator+(const S21Matrix& matrix) {
   result.SumMatrix(matrix);
   return result;
 }
+
+S21Matrix S21Matrix::operator-(const S21Matrix& matrix) {
+  S21Matrix result(*this);
+  result.SubMatrix(matrix);
+  return result;
+}
+
+void S21Matrix::operator+=(const S21Matrix& matrix) { SumMatrix(matrix); }
+
+void S21Matrix::operator-=(const S21Matrix& matrix) { SubMatrix(matrix); }

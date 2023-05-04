@@ -52,9 +52,9 @@ class S21Matrix {
   const std::vector<double> operator[](size_t num) const;
 
   S21Matrix operator+(const S21Matrix& matrix);
-  // S21Matrix operator-(const S21Matrix& matrix);
-  // void operator+=(const S21Matrix& matrix);
-  // void operator-=(const S21Matrix& matrix);
+  S21Matrix operator-(const S21Matrix& matrix);
+  void operator+=(const S21Matrix& matrix);
+  void operator-=(const S21Matrix& matrix);
 
   // S21Matrix operator*(const S21Matrix& matrix);
   // S21Matrix operator*(const double num);
