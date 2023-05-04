@@ -26,6 +26,18 @@ TEST(tests_methods_sum_matrix, correct_arg_2) {
   EXPECT_TRUE(answer.EqMatrix(matrix_1));
 }
 
+TEST(tests_operators_sum_matrix, correct_arg_2) {
+  S21Matrix matrix_1(3, 3);
+  S21Matrix matrix_2(3, 3);
+  S21Matrix answer(3, 3);
+  matrix_1.Assign(2);
+  matrix_2.Assign(2);
+  answer.Assign(4);
+  S21Matrix res = matrix_1 + matrix_2;
+  EXPECT_TRUE(res.EqMatrix(answer));
+  EXPECT_TRUE(answer.EqMatrix(res));
+}
+
 TEST(tests_methods_sum_matrix, correct_arg_3) {
   int rows = rand() % 1000 + 1;
   int columns = rand() % 1000 + 1;
