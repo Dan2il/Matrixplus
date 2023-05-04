@@ -91,7 +91,10 @@ bool S21Matrix::EqMatrix(const S21Matrix& other) {
   bool result = EqSizeMatrix(other);
   for (int index = 0; index < rows_ && result == true; ++index) {
     result = std::equal(matrix_[index].begin(), matrix_[index].end(),
-                        other[index].begin());
+                        other[index].begin(), [](double left, double right) {
+                          return std::fabs(std::fabs(left) - std::fabs(right)) <
+                                 1e-6;
+                        });
   }
   return result;
 }
@@ -135,7 +138,8 @@ void S21Matrix::MulMatrix(const S21Matrix& other) {
 
   } else {
     throw std::invalid_argument(
-        "The number of columns of the first matrix is not equal to the number "
+        "The number of columns of the first matrix is not equal to the "
+        "number "
         "of rows of the second matrix");
   }
 }
@@ -205,17 +209,7 @@ S21Matrix S21Matrix::InverseMatrix() {
   // } else {
   S21Matrix calc_complements = CalcComplements();
   S21Matrix transpose = calc_complements.Transpose();
-  std::cerr << "determinant = " << determinant << std::endl;
-  std::cerr << "determinant = " << 1 / determinant << std::endl;
-  transpose.MulNumber(1000.00 / determinant);
-  for (size_t index_row = 0; index_row < matrix_.size(); ++index_row) {
-    for (size_t index_col = 0; index_col < matrix_.at(index_row).size();
-         ++index_col) {
-      transpose.Assign(index_row, index_col,
-                       transpose(index_row, index_col) / 1000);
-    }
-  }
-
+  transpose.MulNumber(1.00 / determinant);
   // }
   return transpose;
 }
