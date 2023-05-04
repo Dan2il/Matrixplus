@@ -20,20 +20,19 @@ add_library(s21_matrix_oop s21_matrix_oop/s21_matrix_oop.cpp s21_matrix_oop/s21_
 
 add_executable(
     s21_matrix_tests
-
-    # tests/tests_constuctors.cpp
-    # tests/func_for_test.cpp
-    # tests/tests_methods_assign.cpp
-    # tests/tests_operators.cpp
-    # tests/tests_methods_eqmatrix.cpp
-    # tests/tests_methods_summatrix.cpp
-    # tests/tests_methods_submatrix.cpp
-    # tests/tests_methods_multnumber.cpp
-    # tests/tests_methods_multmatrix.cpp
-    # tests/tests_methods_transpose.cpp
-    # tests/tests_methods_minor_matrix.cpp
-    # tests/tests_determinant.cpp
-    # tests/tests_calccomplements.cpp
+    tests/tests_constuctors.cpp
+    tests/func_for_test.cpp
+    tests/tests_methods_assign.cpp
+    tests/tests_operators.cpp
+    tests/tests_methods_eqmatrix.cpp
+    tests/tests_methods_summatrix.cpp
+    tests/tests_methods_submatrix.cpp
+    tests/tests_methods_multnumber.cpp
+    tests/tests_methods_multmatrix.cpp
+    tests/tests_methods_transpose.cpp
+    tests/tests_methods_minor_matrix.cpp
+    tests/tests_determinant.cpp
+    tests/tests_calccomplements.cpp
     tests/tests_inversematrix.cpp
     tests/tests.h
 )
