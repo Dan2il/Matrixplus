@@ -62,3 +62,86 @@ TEST(tests_inverse_matrix, correct_arg_4) {
   EXPECT_TRUE(result.EqMatrix(answer));
   EXPECT_TRUE(answer.EqMatrix(result));
 }
+
+TEST(tests_inverse_matrix, correct_arg_5) {
+  S21Matrix matrix(3, 3);
+  S21Matrix answer(3, 3);
+
+  matrix.Assign({2.8, 1.3, 7.01, -1.03, -2.3, 3.01, 0, -3, 2});
+  answer.Assign({44300.0 / 367429.0, -236300.0 / 367429.0, 200360.0 / 367429.0,
+                 20600.0 / 367429.0, 56000.0 / 367429.0, -156483.0 / 367429.0,
+                 30900.0 / 367429.0, 84000.0 / 367429.0, -51010.0 / 367429.0});
+  S21Matrix result = matrix.InverseMatrix();
+  EXPECT_TRUE(result.EqMatrix(answer));
+  EXPECT_TRUE(answer.EqMatrix(result));
+}
+
+TEST(tests_inverse_matrix, correct_arg_6) {
+  S21Matrix matrix(3, 3);
+  S21Matrix answer(3, 3);
+
+  matrix.Assign({2.0, 5.0, 7.0, 6.0, 3.0, 4.0, 5.0, -2.0, -3.0});
+  answer.Assign({1.0, -1.0, 1.0, -38.0, 41.0, -34.0, 27.0, -29.0, 24.0});
+  S21Matrix result = matrix.InverseMatrix();
+  EXPECT_TRUE(result.EqMatrix(answer));
+  EXPECT_TRUE(answer.EqMatrix(result));
+}
+
+TEST(tests_inverse_matrix, correct_arg_7) {
+  S21Matrix matrix;
+  S21Matrix answer;
+
+  matrix.Assign(1431.12312331);
+  answer.Assign(1.00 / 1431.12312331);
+  S21Matrix result = matrix.InverseMatrix();
+
+  EXPECT_TRUE(result.EqMatrix(answer));
+  EXPECT_TRUE(answer.EqMatrix(result));
+}
+
+TEST(tests_inverse_matrix, correct_arg_8) {
+  S21Matrix matrix(3, 3);
+  S21Matrix answer(3, 3);
+
+  matrix.Assign({2, 5, 7, 6, 3, 4, 5, -2, -3});
+  answer.Assign({1, -1, 1, -38, 41, -34, 27, -29, 24});
+  S21Matrix result = matrix.InverseMatrix();
+
+  EXPECT_TRUE(result.EqMatrix(answer));
+  EXPECT_TRUE(answer.EqMatrix(result));
+}
+
+TEST(tests_inverse_matrix, correct_arg_9) {
+  S21Matrix matrix(3, 3);
+  S21Matrix answer(3, 3);
+
+  matrix.Assign({2, 5, 7, 6, 3, 4, 5, -2, -3});
+  answer.Assign({1, -1, 1, -38, 41, -34, 27, -29, 24});
+  S21Matrix result = matrix.InverseMatrix();
+
+  EXPECT_TRUE(result.EqMatrix(answer));
+  EXPECT_TRUE(answer.EqMatrix(result));
+}
+
+TEST(tests_inverse_matrix, correct_arg_10) {
+  S21Matrix matrix(3, 3);
+  S21Matrix answer(3, 3);
+
+  matrix.Assign({-1, -10, 1, 1, 10, 1, 1, 1, 1});
+  answer.Assign(
+      {-0.5, -11.0 / 18.0, 10.0 / 9.0, 0, 1.0 / 9.0, -1.0 / 9.0, 0.5, 0.5, 0});
+  S21Matrix result = matrix.InverseMatrix();
+
+  EXPECT_TRUE(result.EqMatrix(answer));
+  EXPECT_TRUE(answer.EqMatrix(result));
+}
+
+TEST(tests_inverse_matrix, uncorrect_arg) {
+  S21Matrix matrix;
+  EXPECT_ANY_THROW(matrix.InverseMatrix());
+}
+
+TEST(tests_inverse_matrix, uncorrect_arg_1) {
+  S21Matrix matrix(1, 4);
+  EXPECT_ANY_THROW(matrix.InverseMatrix());
+}
