@@ -29,6 +29,25 @@ TEST(tests_methods_eq_matrix, correct_arg_3) {
   S21Matrix l_matrix(3, 3);
   r_matrix.Assign(5);
   l_matrix.Assign(4);
+
+  // for (int index_row = 0; index_row < r_matrix.GetRows(); ++index_row) {
+  //   for (int index_col = 0; index_col < r_matrix.GetCols(); ++index_col) {
+  //     if (std::fabs(r_matrix(index_row, index_col)) -
+  //             std::fabs(l_matrix(index_row, index_col)) >
+  //         1e-6) {
+  //       std::cerr << "DBL_EPSILON = " << 1e-6 << std::endl;
+  //       std::cerr << "sub == "
+  //                 << std::fabs(r_matrix(index_row, index_col)) -
+  //                        std::fabs(l_matrix(index_row, index_col))
+  //                 << std::endl;
+  //       std::cerr << "answer == " << r_matrix(index_row, index_col)
+  //                 << std::endl;
+  //       std::cerr << "result == " << l_matrix(index_row, index_col)
+  //                 << std::endl;
+  //     }
+  //   }
+  // }
+
   EXPECT_FALSE(l_matrix.EqMatrix(r_matrix));
   EXPECT_FALSE(r_matrix.EqMatrix(l_matrix));
   EXPECT_TRUE(l_matrix.EqMatrix(l_matrix));
