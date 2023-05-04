@@ -203,14 +203,13 @@ S21Matrix S21Matrix::InverseMatrix() {
   if (!determinant) {
     throw std::invalid_argument("Matrix determinant is 0");
   }
-  S21Matrix result;
-  // if (rows_ == 1) {
-  //   result.Assign(1 / matrix_.at(0).at(0));
-  // } else {
   S21Matrix calc_complements = CalcComplements();
   S21Matrix transpose = calc_complements.Transpose();
-  transpose.MulNumber(1.00 / determinant);
-  // }
+  if (rows_ == 1) {
+    transpose.Assign(1.00 / matrix_.at(0).at(0));
+  } else {
+    transpose.MulNumber(1.00 / determinant);
+  }
   return transpose;
 }
 
