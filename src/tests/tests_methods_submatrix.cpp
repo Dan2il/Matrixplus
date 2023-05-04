@@ -79,13 +79,5 @@ TEST(tests_methods_sub_matrix, uncorrect_arg) {
   rows = rand() % 1000 + 1;
   columns = rand() % 1000 + 1;
   S21Matrix matrix_2(rows, columns);
-
-  matrix_1.SubMatrix(matrix_2);
-
-  EXPECT_TRUE(matrix_1.EqMatrix(matrix_1_save));
-  EXPECT_TRUE(matrix_1_save.EqMatrix(matrix_1));
-}
-
-TEST(tests_methods_sub_matrix, uncorrect_arg_2) {
-  //
+  EXPECT_ANY_THROW(matrix_1.SubMatrix(matrix_2));
 }

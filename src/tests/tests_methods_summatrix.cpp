@@ -26,18 +26,6 @@ TEST(tests_methods_sum_matrix, correct_arg_2) {
   EXPECT_TRUE(answer.EqMatrix(matrix_1));
 }
 
-TEST(tests_operators_sum_matrix, correct_arg_2) {
-  S21Matrix matrix_1(3, 3);
-  S21Matrix matrix_2(3, 3);
-  S21Matrix answer(3, 3);
-  matrix_1.Assign(2);
-  matrix_2.Assign(2);
-  answer.Assign(4);
-  S21Matrix res = matrix_1 + matrix_2;
-  EXPECT_TRUE(res.EqMatrix(answer));
-  EXPECT_TRUE(answer.EqMatrix(res));
-}
-
 TEST(tests_methods_sum_matrix, correct_arg_3) {
   int rows = rand() % 1000 + 1;
   int columns = rand() % 1000 + 1;
@@ -77,31 +65,17 @@ TEST(tests_methods_sum_matrix, uncorrect_matrix) {
   S21Matrix matrix_1(6, 3);
   S21Matrix matrix_2(3, 6);
   matrix_2.Assign({1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1});
-
-  matrix_1.SumMatrix(matrix_2);
-
-  EXPECT_FALSE(matrix_1.EqMatrix(matrix_2));
-  EXPECT_FALSE(matrix_2.EqMatrix(matrix_1));
-  EXPECT_TRUE(matrix_2.EqMatrix(matrix_2));
-  EXPECT_TRUE(matrix_1.EqMatrix(matrix_1));
+  EXPECT_ANY_THROW(matrix_1.SumMatrix(matrix_2));
 }
 
 TEST(tests_methods_sum_matrix, uncorrect_matrix_2) {
   S21Matrix matrix_1(rand() % 1000 + 1, rand() % 1000 + 1);
   S21Matrix matrix_2(rand() % 1000 + 1, rand() % 1000 + 1);
-
-  S21Matrix matrix_1_save(matrix_1);
-
-  matrix_1.SumMatrix(matrix_2);
-  EXPECT_TRUE(matrix_1.EqMatrix(matrix_1_save));
+  EXPECT_ANY_THROW(matrix_1.SumMatrix(matrix_2));
 }
 
 TEST(tests_methods_sum_matrix, uncorrect_matrix_3) {
   S21Matrix matrix_1;
   S21Matrix matrix_2(2, 2);
-
-  S21Matrix matrix_1_save(matrix_1);
-
-  matrix_1.SumMatrix(matrix_2);
-  EXPECT_TRUE(matrix_1.EqMatrix(matrix_1_save));
+  EXPECT_ANY_THROW(matrix_1.SumMatrix(matrix_2));
 }
