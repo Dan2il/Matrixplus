@@ -276,3 +276,9 @@ std::vector<double> S21Matrix::operator[](size_t num) {
 const std::vector<double> S21Matrix::operator[](size_t num) const {
   return matrix_.at(num);
 }
+
+S21Matrix S21Matrix::operator+(const S21Matrix& matrix) {
+  S21Matrix result(*this);
+  result.SumMatrix(matrix);
+  return result;
+}
