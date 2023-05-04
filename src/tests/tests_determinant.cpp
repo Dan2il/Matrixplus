@@ -133,6 +133,15 @@ TEST(tests_determinant, correct_arg_17) {
   EXPECT_DOUBLE_EQ(result, 13608);
 }
 
+TEST(tests_determinant, correct_arg_18) {
+  S21Matrix matrix(3, 3);
+  matrix.Assign({0.32, 0.89, 0.64, 0.09, 0.72, 0.29, 0.83, 0.09, 0.12
+
+  });
+  double result = matrix.Determinant();
+  EXPECT_DOUBLE_EQ(result, -0.153373);
+}
+
 TEST(tests_determinant, uncorrect_arg) {
   S21Matrix matrix(5, 4);
   EXPECT_ANY_THROW(matrix.Determinant());
