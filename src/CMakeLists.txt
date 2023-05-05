@@ -35,6 +35,10 @@ add_executable(
     tests/tests_calccomplements.cpp
     tests/tests_inversematrix.cpp
     tests/tests_operators_plus.cpp
+    tests/tests_operators_minus.cpp
+    tests/tests_operators_mul.cpp
+    tests/tests_operators_eq.cpp
+    tests/tests_operators_assign.cpp
     tests/tests.h
 )
 
