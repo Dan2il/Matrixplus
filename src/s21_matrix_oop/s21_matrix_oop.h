@@ -24,6 +24,7 @@ class S21Matrix {
   S21Matrix& Erace(const int row, const int col);
 
   bool EqMatrix(const S21Matrix& other);
+  bool EqMatrix(const S21Matrix& other) const;
 
   void SumMatrix(const S21Matrix& other);
   void SubMatrix(const S21Matrix& other);
@@ -36,8 +37,12 @@ class S21Matrix {
   S21Matrix InverseMatrix();
 
   S21Matrix GetMinorMatrix(const int rows, const int columns);
+
   int GetRows() const;
   int GetCols() const;
+
+  void SetRows(const int rows);
+  void SetCols(const int cols);
 
   template <typename Function>
   void ForEachMatrix(const S21Matrix& other, Function func);
@@ -51,17 +56,23 @@ class S21Matrix {
   std::vector<double> operator[](size_t num);
   const std::vector<double> operator[](size_t num) const;
 
+  void operator=(const S21Matrix& matrix);
+
   S21Matrix operator+(const S21Matrix& matrix);
   S21Matrix operator-(const S21Matrix& matrix);
   void operator+=(const S21Matrix& matrix);
   void operator-=(const S21Matrix& matrix);
 
-  // S21Matrix operator*(const S21Matrix& matrix);
-  // S21Matrix operator*(const double num);
-  // void operator*=(const S21Matrix& matrix);
-  // void operator*=(const double num);
+  friend S21Matrix operator*(const double num, const S21Matrix& matrix);
+  friend S21Matrix operator*(const S21Matrix& matrix, const double num);
 
-  // bool operator==(const S21Matrix matrix);
+  S21Matrix operator*(const S21Matrix& matrix);
+
+  void operator*=(const S21Matrix& matrix);
+  void operator*=(const double num);
+
+  bool operator==(const S21Matrix matrix);
+  bool operator==(const S21Matrix matrix) const;
 
   ~S21Matrix() = default;
 
@@ -72,5 +83,8 @@ class S21Matrix {
   std::vector<std::vector<double>> matrix_;
 
   void CheckCorrectRowsAndCols();
-  bool EqSizeMatrix(const S21Matrix& other);
+  bool EqSizeMatrix(const S21Matrix& other) const;
 };
+
+S21Matrix operator*(const double num, const S21Matrix& matrix);
+S21Matrix operator*(const S21Matrix& matrix, const double num);
