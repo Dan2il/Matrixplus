@@ -1,6 +1,6 @@
 #include "tests.h"
 
-TEST(tests_methods_eq_matrix, correct_arg) {
+TEST(tests_operators_eq, correct_arg) {
   S21Matrix matrix_1(3, 6);
   S21Matrix matrix_2(3, 6);
   matrix_1.Assign({234.32423, 234234.432, 3, 324, 23432, 0, -345345,
@@ -9,63 +9,45 @@ TEST(tests_methods_eq_matrix, correct_arg) {
   matrix_2.Assign({234.32423, 234234.432, 3, 324, 23432, 0, -345345,
                    234.32423, 234234.432, 3, 324, 23432, 0, -345345,
                    234.32423, 234234.432, 3, 324, 23432, 0, -345345});
-  EXPECT_TRUE(matrix_1.EqMatrix(matrix_2));
-  EXPECT_TRUE(matrix_2.EqMatrix(matrix_1));
-  EXPECT_TRUE(matrix_2.EqMatrix(matrix_2));
-  EXPECT_TRUE(matrix_1.EqMatrix(matrix_1));
+  EXPECT_TRUE(matrix_1 == matrix_2);
+  EXPECT_TRUE(matrix_2 == matrix_1);
+  EXPECT_TRUE(matrix_2 == matrix_2);
+  EXPECT_TRUE(matrix_1 == matrix_1);
 }
 
-TEST(tests_methods_eq_matrix, correct_arg_2) {
+TEST(tests_operators_eq, correct_arg_2) {
   S21Matrix r_matrix(3, 3);
   S21Matrix l_matrix(3, 3);
   r_matrix.Assign(5);
   l_matrix.Assign(5);
-  EXPECT_TRUE(l_matrix.EqMatrix(r_matrix));
-  EXPECT_TRUE(r_matrix.EqMatrix(l_matrix));
+  EXPECT_TRUE(l_matrix == r_matrix);
+  EXPECT_TRUE(r_matrix == l_matrix);
 }
 
-TEST(tests_methods_eq_matrix, correct_arg_3) {
+TEST(tests_operators_eq, correct_arg_3) {
   S21Matrix r_matrix(3, 3);
   S21Matrix l_matrix(3, 3);
   r_matrix.Assign(5);
   l_matrix.Assign(4);
 
-  // for (int index_row = 0; index_row < r_matrix.GetRows(); ++index_row) {
-  //   for (int index_col = 0; index_col < r_matrix.GetCols(); ++index_col) {
-  //     if (std::fabs(r_matrix(index_row, index_col)) -
-  //             std::fabs(l_matrix(index_row, index_col)) >
-  //         1e-6) {
-  //       std::cerr << "DBL_EPSILON = " << 1e-6 << std::endl;
-  //       std::cerr << "sub == "
-  //                 << std::fabs(r_matrix(index_row, index_col)) -
-  //                        std::fabs(l_matrix(index_row, index_col))
-  //                 << std::endl;
-  //       std::cerr << "answer == " << r_matrix(index_row, index_col)
-  //                 << std::endl;
-  //       std::cerr << "result == " << l_matrix(index_row, index_col)
-  //                 << std::endl;
-  //     }
-  //   }
-  // }
-
-  EXPECT_FALSE(l_matrix.EqMatrix(r_matrix));
-  EXPECT_FALSE(r_matrix.EqMatrix(l_matrix));
-  EXPECT_TRUE(l_matrix.EqMatrix(l_matrix));
-  EXPECT_TRUE(r_matrix.EqMatrix(r_matrix));
+  EXPECT_FALSE(l_matrix == r_matrix);
+  EXPECT_FALSE(r_matrix == l_matrix);
+  EXPECT_TRUE(l_matrix == l_matrix);
+  EXPECT_TRUE(r_matrix == r_matrix);
 }
 
-TEST(tests_methods_eq_matrix, correct_arg_5) {
+TEST(tests_operators_eq, correct_arg_5) {
   S21Matrix r_matrix(3, 2);
   S21Matrix l_matrix(3, 3);
   r_matrix.Assign(5);
   l_matrix.Assign(5);
-  EXPECT_FALSE(l_matrix.EqMatrix(r_matrix));
-  EXPECT_FALSE(r_matrix.EqMatrix(l_matrix));
-  EXPECT_TRUE(l_matrix.EqMatrix(l_matrix));
-  EXPECT_TRUE(r_matrix.EqMatrix(r_matrix));
+  EXPECT_FALSE(l_matrix == r_matrix);
+  EXPECT_FALSE(r_matrix == l_matrix);
+  EXPECT_TRUE(l_matrix == l_matrix);
+  EXPECT_TRUE(r_matrix == r_matrix);
 }
 
-TEST(tests_methods_eq_matrix, correct_arg_6) {
+TEST(tests_operators_eq, correct_arg_6) {
   int rows = rand() % 1000 + 1;
   int columns = rand() % 1000 + 1;
   S21Matrix matrix_1(rows, columns);
@@ -77,13 +59,13 @@ TEST(tests_methods_eq_matrix, correct_arg_6) {
       matrix_2.Assign(i, j, val);
     }
   }
-  EXPECT_TRUE(matrix_1.EqMatrix(matrix_2));
-  EXPECT_TRUE(matrix_2.EqMatrix(matrix_1));
-  EXPECT_TRUE(matrix_1.EqMatrix(matrix_1));
-  EXPECT_TRUE(matrix_2.EqMatrix(matrix_2));
+  EXPECT_TRUE(matrix_1 == matrix_2);
+  EXPECT_TRUE(matrix_2 == matrix_1);
+  EXPECT_TRUE(matrix_1 == matrix_1);
+  EXPECT_TRUE(matrix_2 == matrix_2);
 }
 
-TEST(tests_methods_eq_matrix, correct_arg_7) {
+TEST(tests_operators_eq, correct_arg_7) {
   int rows = rand() % 1000 + 1;
   int columns = rand() % 1000 + 1;
   S21Matrix matrix_1(rows, columns);
@@ -96,63 +78,48 @@ TEST(tests_methods_eq_matrix, correct_arg_7) {
       matrix_2.Assign(i, j, val);
     }
   }
-  EXPECT_FALSE(matrix_1.EqMatrix(matrix_2));
-  EXPECT_FALSE(matrix_2.EqMatrix(matrix_1));
-  EXPECT_TRUE(matrix_1.EqMatrix(matrix_1));
-  EXPECT_TRUE(matrix_2.EqMatrix(matrix_2));
+  EXPECT_FALSE(matrix_1 == matrix_2);
+  EXPECT_FALSE(matrix_2 == matrix_1);
+  EXPECT_TRUE(matrix_1 == matrix_1);
+  EXPECT_TRUE(matrix_2 == matrix_2);
 }
 
-TEST(tests_methods_eq_matrix, correct_arg_8) {
+TEST(tests_operators_eq, correct_arg_8) {
   S21Matrix matrix_1(3, 3);
   S21Matrix matrix_2(3, 3);
 
   matrix_1.Assign({0.25, 1.25, 2.25, 3.25, 4.25, 5.25, 6.25, 7.25, 8.25});
   matrix_2.Assign({0.25, 1.25, 2.25, 3.25, 4.25, 5.25, 6.25, 7.25, 8.25});
 
-  EXPECT_TRUE(matrix_1.EqMatrix(matrix_2));
-  EXPECT_TRUE(matrix_2.EqMatrix(matrix_1));
-  EXPECT_TRUE(matrix_1.EqMatrix(matrix_1));
-  EXPECT_TRUE(matrix_2.EqMatrix(matrix_2));
+  EXPECT_TRUE(matrix_1 == matrix_2);
+  EXPECT_TRUE(matrix_2 == matrix_1);
+  EXPECT_TRUE(matrix_1 == matrix_1);
+  EXPECT_TRUE(matrix_2 == matrix_2);
 }
 
-TEST(tests_methods_eq_matrix, correct_arg_9) {
+TEST(tests_operators_eq, correct_arg_9) {
   S21Matrix matrix_1(3, 3);
   S21Matrix matrix_2(3, 3);
 
   matrix_1.Assign({0.25, 1.25, 2.25, 3.25, 4.25, 5.25, 6.25, 7.25, 8.25});
   matrix_2.Assign({0.25, 1.25, 2.25, 3.25, 4.25});
 
-  EXPECT_FALSE(matrix_1.EqMatrix(matrix_2));
-  EXPECT_FALSE(matrix_2.EqMatrix(matrix_1));
-  EXPECT_TRUE(matrix_1.EqMatrix(matrix_1));
-  EXPECT_TRUE(matrix_2.EqMatrix(matrix_2));
+  EXPECT_FALSE(matrix_1 == matrix_2);
+  EXPECT_FALSE(matrix_2 == matrix_1);
+  EXPECT_TRUE(matrix_1 == matrix_1);
+  EXPECT_TRUE(matrix_2 == matrix_2);
 }
 
-TEST(tests_methods_eq_matrix, correct_arg_10) {
+TEST(tests_operators_eq, correct_arg_10) {
   S21Matrix matrix_1(rand() % 1000 + 1, rand() % 1000 + 1);
   S21Matrix matrix_2(rand() % 1000 + 1, rand() % 1000 + 1);
-  EXPECT_FALSE(matrix_1.EqMatrix(matrix_2));
-  EXPECT_FALSE(matrix_2.EqMatrix(matrix_1));
-  EXPECT_TRUE(matrix_1.EqMatrix(matrix_1));
-  EXPECT_TRUE(matrix_2.EqMatrix(matrix_2));
+  EXPECT_FALSE(matrix_1 == matrix_2);
+  EXPECT_FALSE(matrix_2 == matrix_1);
+  EXPECT_TRUE(matrix_1 == matrix_1);
+  EXPECT_TRUE(matrix_2 == matrix_2);
 }
 
-TEST(tests_methods_eq_matrix, uncorrect_arg) {
-  S21Matrix matrix_1(3, 6);
-  S21Matrix matrix_2;
-  matrix_1.Assign({234.32423, 234234.432, 3, 324, 23432, 0, -345345,
-                   234.32423, 234234.432, 3, 324, 23432, 0, -345345,
-                   234.32423, 234234.432, 3, 324, 23432, 0, -345345});
-  EXPECT_FALSE(matrix_1.EqMatrix(matrix_2));
-}
-
-TEST(tests_methods_eq_matrix, uncorrect_arg_2) {
-  S21Matrix r_matrix(3, 2);
-  EXPECT_ANY_THROW(r_matrix.EqMatrix(S21Matrix(0, 0)));
-  EXPECT_ANY_THROW(r_matrix.EqMatrix(S21Matrix((int)NULL, (int)NULL)));
-}
-
-TEST(tests_methods_eq_matrix, few_correct_arg) {
+TEST(tests_operators_eq, correct_arg_11) {
   S21Matrix matrix_1(3, 6);
   S21Matrix matrix_2(3, 6);
   matrix_1.Assign({234.32423, 234234.432, 3, 324, 23432, 0, -345345, 234.32423,
@@ -161,8 +128,17 @@ TEST(tests_methods_eq_matrix, few_correct_arg) {
   matrix_2.Assign({234.32423, 234234.432, 3, 324, 23432, 0, -345345, 234.32423,
                    234234.432, 3, 324, 23432, 0, -345345, 234.32423,
                    234234.432});
-  EXPECT_TRUE(matrix_1.EqMatrix(matrix_2));
-  EXPECT_TRUE(matrix_2.EqMatrix(matrix_1));
-  EXPECT_TRUE(matrix_2.EqMatrix(matrix_2));
-  EXPECT_TRUE(matrix_1.EqMatrix(matrix_1));
+  EXPECT_TRUE(matrix_1 == matrix_2);
+  EXPECT_TRUE(matrix_2 == matrix_1);
+  EXPECT_TRUE(matrix_2 == matrix_2);
+  EXPECT_TRUE(matrix_1 == matrix_1);
+}
+
+TEST(tests_operators_eq, uncorrect_arg) {
+  S21Matrix matrix_1(3, 6);
+  S21Matrix matrix_2;
+  matrix_1.Assign({234.32423, 234234.432, 3, 324, 23432, 0, -345345,
+                   234.32423, 234234.432, 3, 324, 23432, 0, -345345,
+                   234.32423, 234234.432, 3, 324, 23432, 0, -345345});
+  EXPECT_FALSE(matrix_1 == matrix_2);
 }
