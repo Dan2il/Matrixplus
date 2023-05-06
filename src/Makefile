@@ -15,3 +15,4 @@ gtest_uninstall:
 
 clean:
 	rm -rf build
+	rm -rf *.html
