@@ -13,6 +13,10 @@ gtest_install:
 gtest_uninstall:
 	rm -rf googletest
 
+coverage: test
+	mkdir report 
+	gcovr --html-details report/coverage.html  -r s21_matrix_oop .
+
 clean:
-	rm -rf build
-	rm -rf *.html
+	rm -rf build report
+	rm -rf *.html *.css
