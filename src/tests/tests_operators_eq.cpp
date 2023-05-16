@@ -119,6 +119,25 @@ TEST(tests_methods_eq_matrix, correct_arg_10) {
   EXPECT_TRUE(matrix_2.EqMatrix(matrix_2));
 }
 
+TEST(tests_methods_eq, correcr_arg_11) {
+  S21Matrix matrix1(3, 3);
+  S21Matrix matrix2(3, 3);
+  matrix1.Assign({1.1, 1.00000001});
+  matrix2.Assign({1.1, 1.00000001});
+  EXPECT_TRUE(matrix2.EqMatrix(matrix1));
+}
+
+TEST(tests_methods_eq, correcr_arg_12) {
+  S21Matrix matrix1(3, 3);
+  S21Matrix matrix2(3, 3);
+  S21Matrix matrix3(2, 3);
+  S21Matrix matrix4(3, 3);
+  matrix1.Assign({1.1});
+  matrix2.Assign({1.2});
+  EXPECT_FALSE(matrix2.EqMatrix(matrix1));
+  EXPECT_FALSE(matrix4.EqMatrix(matrix3));
+}
+
 TEST(tests_methods_eq_matrix, uncorrect_arg) {
   S21Matrix matrix_1(3, 6);
   S21Matrix matrix_2;

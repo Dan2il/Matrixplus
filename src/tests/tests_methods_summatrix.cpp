@@ -61,6 +61,14 @@ TEST(tests_methods_sum_matrix, correct_arg_4) {
   EXPECT_TRUE(result.EqMatrix(matrix_1));
 }
 
+TEST(tests_methods_sum_matrix, correct_arg_5) {
+  S21Matrix matrix1(3, 3);
+  S21Matrix matrix2(3, 3);
+  matrix2.Assign({5});
+  matrix1.SumMatrix(matrix2);
+  EXPECT_TRUE(matrix1.EqMatrix(matrix2));
+}
+
 TEST(tests_methods_sum_matrix, uncorrect_matrix) {
   S21Matrix matrix_1(6, 3);
   S21Matrix matrix_2(3, 6);

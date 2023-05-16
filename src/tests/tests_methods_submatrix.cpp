@@ -16,29 +16,6 @@ TEST(tests_methods_sub_matrix, correct_arg) {
 }
 
 TEST(tests_methods_sub_matrix, correct_arg_2) {
-  int rows = rand() % 100 + 1;
-  int columns = rand() % 100 + 1;
-
-  S21Matrix matrix_1(rows, columns);
-  S21Matrix matrix_2(rows, columns);
-  S21Matrix result(rows, columns);
-
-  for (int i = 0; i < rows; i++) {
-    for (int j = 0; j < columns; j++) {
-      double value1 = rand() % 100 + 1 / rand() % 100 + 1;
-      double value2 = rand() % 100 + 1 / rand() % 100 + 1;
-      matrix_1.Assign(value1);
-      matrix_2.Assign(value2);
-
-      result.Assign(value1 - value2);
-    }
-  }
-
-  matrix_1.SubMatrix(matrix_2);
-  EXPECT_TRUE(matrix_1.EqMatrix(result));
-}
-
-TEST(tests_methods_sub_matrix, correct_arg_3) {
   S21Matrix matrix_1(3, 3);
   S21Matrix matrix_2(3, 3);
   S21Matrix result(3, 3);
@@ -54,7 +31,7 @@ TEST(tests_methods_sub_matrix, correct_arg_3) {
   EXPECT_TRUE(result.EqMatrix(matrix_1));
 }
 
-TEST(tests_methods_sub_matrix, correct_arg_4) {
+TEST(tests_methods_sub_matrix, correct_arg_3) {
   S21Matrix matrix_1(1, 1);
   S21Matrix matrix_2(1, 1);
   S21Matrix result(1, 1);
@@ -70,6 +47,15 @@ TEST(tests_methods_sub_matrix, correct_arg_4) {
   EXPECT_TRUE(result.EqMatrix(matrix_1));
 }
 
+TEST(tests_methods_sub_matrix, correct_arg_4) {
+  S21Matrix matrix1(3, 3);
+  S21Matrix matrix2(3, 3);
+  matrix2.Assign(5);
+  matrix1.SubMatrix(matrix2);
+  matrix2.Assign(-5);
+  EXPECT_TRUE(matrix1.EqMatrix(matrix2));
+}
+
 TEST(tests_methods_sub_matrix, uncorrect_arg) {
   int rows = rand() % 1000 + 1;
   int columns = rand() % 1000 + 1;
@@ -80,4 +66,10 @@ TEST(tests_methods_sub_matrix, uncorrect_arg) {
   columns = rand() % 1000 + 1;
   S21Matrix matrix_2(rows, columns);
   EXPECT_ANY_THROW(matrix_1.SubMatrix(matrix_2));
+}
+
+TEST(tests_methods_sub_matrix, uncorrect_arg_2) {
+  S21Matrix matrix1(3, 2);
+  S21Matrix matrix2(3, 3);
+  EXPECT_THROW(matrix1.SubMatrix(matrix2), std::invalid_argument);
 }

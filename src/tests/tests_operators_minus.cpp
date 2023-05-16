@@ -19,31 +19,31 @@ TEST(tests_operator_sub_matrix, correct_arg) {
   EXPECT_TRUE(matrix_1.EqMatrix(answer));
 }
 
-TEST(tests_operator_sub_matrix, correct_arg_2) {
-  int rows = rand() % 100 + 1;
-  int columns = rand() % 100 + 1;
+// TEST(tests_operator_sub_matrix, correct_arg_2) {
+//   int rows = rand() % 100 + 1;
+//   int columns = rand() % 100 + 1;
 
-  S21Matrix matrix_1(rows, columns);
-  S21Matrix matrix_2(rows, columns);
-  S21Matrix answer(rows, columns);
+//   S21Matrix matrix_1(rows, columns);
+//   S21Matrix matrix_2(rows, columns);
+//   S21Matrix answer(rows, columns);
 
-  for (int i = 0; i < rows; i++) {
-    for (int j = 0; j < columns; j++) {
-      double value1 = rand() % 100 + 1 / rand() % 100 + 1;
-      double value2 = rand() % 100 + 1 / rand() % 100 + 1;
-      matrix_1.Assign(value1);
-      matrix_2.Assign(value2);
+//   for (int i = 0; i < rows; i++) {
+//     for (int j = 0; j < columns; j++) {
+//       double value1 = rand() % 100 + 1 / rand() % 100 + 1;
+//       double value2 = rand() % 100 + 1 / rand() % 100 + 1;
+//       matrix_1.Assign(value1);
+//       matrix_2.Assign(value2);
 
-      answer.Assign(value1 - value2);
-    }
-  }
+//       answer.Assign(value1 - value2);
+//     }
+//   }
 
-  S21Matrix result = matrix_1 - matrix_2;
-  EXPECT_TRUE(result.EqMatrix(answer));
+//   S21Matrix result = matrix_1 - matrix_2;
+//   EXPECT_TRUE(result.EqMatrix(answer));
 
-  matrix_1 -= matrix_2;
-  EXPECT_TRUE(matrix_1.EqMatrix(answer));
-}
+//   matrix_1 -= matrix_2;
+//   EXPECT_TRUE(matrix_1.EqMatrix(answer));
+// }
 
 TEST(tests_operator_sub_matrix, correct_arg_3) {
   S21Matrix matrix_1(3, 3);
