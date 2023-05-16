@@ -88,3 +88,29 @@ class S21Matrix {
 
 S21Matrix operator*(const double num, const S21Matrix& matrix);
 S21Matrix operator*(const S21Matrix& matrix, const double num);
+
+template <typename Function>
+void S21Matrix::ForEachMatrix(const S21Matrix& other, Function func) {
+  std::vector<std::vector<double>> matrix(rows_, std::vector<double>(cols_, 0));
+  for (size_t index_row = 0; index_row < matrix.size(); ++index_row) {
+    for (size_t index_col = 0; index_col < matrix.at(index_row).size();
+         ++index_col) {
+      matrix.at(index_row).at(index_col) = func(
+          matrix_.at(index_row).at(index_col), other(index_row, index_col));
+    }
+  }
+  std::swap(matrix_, matrix);
+}
+
+template <typename Function>
+void S21Matrix::ForEachMatrix(Function func) {
+  std::vector<std::vector<double>> matrix(rows_, std::vector<double>(cols_, 0));
+  for (size_t index_row = 0; index_row < matrix.size(); ++index_row) {
+    for (size_t index_col = 0; index_col < matrix.at(index_row).size();
+         ++index_col) {
+      matrix.at(index_row).at(index_col) =
+          func(matrix_.at(index_row).at(index_col));
+    }
+  }
+  matrix_ = std::move(matrix);
+}
