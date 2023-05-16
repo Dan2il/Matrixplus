@@ -9,7 +9,8 @@ FetchContent_Declare(
     URL https://github.com/google/googletest/archive/5376968f6948923e2411081fd9372e71a59d8e77.zip
 )
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} --coverage -g -O0 -std=c++17 -Wall -Werror -Wextra")
-set(CMAKE_CXX_FLAGS --coverage)
+
+# set(CMAKE_CXX_FLAGS --coverage)
 
 # For Windows: Prevent overriding the parent project's compiler/linker settings
 set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
@@ -17,7 +18,16 @@ FetchContent_MakeAvailable(googletest)
 
 enable_testing()
 
-add_library(s21_matrix_oop s21_matrix_oop/s21_matrix_oop.cpp s21_matrix_oop/s21_matrix_oop.h)
+add_library(
+    s21_matrix_oop
+    s21_matrix_oop/definitions/constructors.cpp
+    s21_matrix_oop/definitions/assign.cpp
+    s21_matrix_oop/definitions/comparison.cpp
+    s21_matrix_oop/definitions/arithmetic_operations.cpp
+    s21_matrix_oop/definitions/operators.cpp
+    s21_matrix_oop/definitions/matrix_operations.cpp
+    s21_matrix_oop/definitions/other_methods.cpp
+    s21_matrix_oop/s21_matrix_oop.h)
 
 add_executable(
     s21_matrix_tests
