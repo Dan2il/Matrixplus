@@ -26,5 +26,9 @@ coverage: test
 	mkdir report 
 	gcovr --html-details report/coverage.html  -r s21_matrix_oop .
 
+valgrind:
+	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --verbose --log-file=_valgrind-out.txt ./build/s21_matrix_tests
+
+
 clean:
 	rm -rf build report *.o *.a *.html *.css
