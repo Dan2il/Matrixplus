@@ -1,7 +1,16 @@
-test: clean gtest_install
+SOURCES = s21_matrix_oop/sources/constructors.cpp s21_matrix_oop/sources/assign.cpp s21_matrix_oop/sources/comparison.cpp s21_matrix_oop/sources/arithmetic_operations.cpp s21_matrix_oop/sources/operators.cpp s21_matrix_oop/sources/matrix_operations.cpp s21_matrix_oop/sources/other_methods.cpp
+
+all: test s21_matrix_oop.a
+
+test: gtest_install
 	cmake -S . -B build
 	cmake --build build
 	cd build && ctest --rerun-failed --output-on-failure
+
+s21_matrix_oop.a:
+	g++ -c $(SOURCES)
+	ar rcs s21_matrix_oop.a constructors.o assign.o comparison.o arithmetic_operations.o operators.o matrix_operations.o other_methods.o
+	rm -rf *.o
 
 gtest_install:
 	if test ! -d googletest; \
@@ -18,5 +27,4 @@ coverage: test
 	gcovr --html-details report/coverage.html  -r s21_matrix_oop .
 
 clean:
-	rm -rf build report
-	rm -rf *.html *.css
+	rm -rf build report *.o *.a *.html *.css
