@@ -20,13 +20,13 @@ enable_testing()
 
 add_library(
     s21_matrix_oop
-    s21_matrix_oop/definitions/constructors.cpp
-    s21_matrix_oop/definitions/assign.cpp
-    s21_matrix_oop/definitions/comparison.cpp
-    s21_matrix_oop/definitions/arithmetic_operations.cpp
-    s21_matrix_oop/definitions/operators.cpp
-    s21_matrix_oop/definitions/matrix_operations.cpp
-    s21_matrix_oop/definitions/other_methods.cpp
+    s21_matrix_oop/sources/constructors.cpp
+    s21_matrix_oop/sources/assign.cpp
+    s21_matrix_oop/sources/comparison.cpp
+    s21_matrix_oop/sources/arithmetic_operations.cpp
+    s21_matrix_oop/sources/operators.cpp
+    s21_matrix_oop/sources/matrix_operations.cpp
+    s21_matrix_oop/sources/other_methods.cpp
     s21_matrix_oop/s21_matrix_oop.h)
 
 add_executable(
