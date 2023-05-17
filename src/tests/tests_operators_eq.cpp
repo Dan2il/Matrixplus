@@ -132,8 +132,8 @@ TEST(tests_methods_eq, correcr_arg_12) {
   S21Matrix matrix2(3, 3);
   S21Matrix matrix3(2, 3);
   S21Matrix matrix4(3, 3);
-  matrix1.Assign({1.1});
-  matrix2.Assign({1.2});
+  matrix1.Assign(std::vector<double>{1.1});
+  matrix2.Assign(std::vector<double>{1.2});
   EXPECT_FALSE(matrix2.EqMatrix(matrix1));
   EXPECT_FALSE(matrix4.EqMatrix(matrix3));
 }

@@ -28,6 +28,16 @@ TEST(tests_constuctors, simple_argument_3) {
   EXPECT_EQ(matrix.GetCols(), 4);
 }
 
+TEST(tests_constuctors, old_test_1) {
+  S21Matrix matrix(100, 100);
+  EXPECT_EQ(matrix.GetRows(), 100);
+  EXPECT_EQ(matrix.GetCols(), 100);
+}
+
+TEST(tests_constuctors, old_test_2) {
+  EXPECT_ANY_THROW(S21Matrix matrix(INT_MAX, 0));
+}
+
 TEST(tests_constuctors, uncorrect_argument) {
   EXPECT_ANY_THROW(S21Matrix matrix(-5, 25));
   EXPECT_ANY_THROW(S21Matrix matrix(0, 25));

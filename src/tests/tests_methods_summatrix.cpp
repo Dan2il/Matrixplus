@@ -64,7 +64,7 @@ TEST(tests_methods_sum_matrix, correct_arg_4) {
 TEST(tests_methods_sum_matrix, correct_arg_5) {
   S21Matrix matrix1(3, 3);
   S21Matrix matrix2(3, 3);
-  matrix2.Assign({5});
+  matrix2.Assign(std::vector<double>{5});
   matrix1.SumMatrix(matrix2);
   EXPECT_TRUE(matrix1.EqMatrix(matrix2));
 }
