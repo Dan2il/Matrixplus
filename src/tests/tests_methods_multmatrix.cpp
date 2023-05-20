@@ -27,6 +27,18 @@ TEST(tests_methods_mult_matrix, correct_arg_2) {
 
   matrix_1.MulMatrix(matrix_2);
 
+  std::cout << "cols = " << matrix_1.GetCols() << std::endl;
+  std::cout << "cols res = " << result.GetCols() << std::endl;
+
+  std::cout << "rows = " << matrix_1.GetRows() << std::endl;
+  std::cout << "rows res = " << result.GetRows() << std::endl;
+
+  std::cout << matrix_1(0, 0) << std::endl;
+  std::cout << matrix_1(1, 0) << std::endl;
+  std::cout << matrix_1(2, 0) << std::endl;
+
+  EXPECT_EQ(matrix_1.GetCols(), 1);
+  EXPECT_EQ(matrix_1.GetRows(), 3);
   EXPECT_TRUE(matrix_1.EqMatrix(result));
   EXPECT_TRUE(result.EqMatrix(matrix_1));
 }
