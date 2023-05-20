@@ -7,7 +7,7 @@ TEST(tests_methods, assign) {
 }
 
 TEST(tests_methods, assign_few_argument) {
-  S21Matrix matrix(1, 10);
+  S21Matrix matrix(1, 10, {1, 1, 1, 1, 4, 4, 4, 4});
   matrix.Assign({1, 1, 1, 1, 4, 4, 4, 4});
   CheckMatrixRange({1, 1, 1, 1, 4, 4, 4, 4, 0, 0}, matrix);
 }

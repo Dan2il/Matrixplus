@@ -1,15 +1,13 @@
 #include "tests.h"
 
 TEST(tests_determinant, correct_arg) {
-  S21Matrix matrix(3, 3);
-  matrix.Assign({1, 2, 3, 4, 5, 6, 7, 8, 9});
+  S21Matrix matrix(3, 3, {1, 2, 3, 4, 5, 6, 7, 8, 9});
   double result = matrix.Determinant();
   EXPECT_DOUBLE_EQ(result, 0);
 }
 
 TEST(tests_determinant, correct_arg_2) {
-  S21Matrix matrix(3, 3);
-  matrix.Assign({2, 5, 7, 6, 3, 4, 5, -2, -3});
+  S21Matrix matrix(3, 3, {2, 5, 7, 6, 3, 4, 5, -2, -3});
   double result = matrix.Determinant();
   EXPECT_DOUBLE_EQ(result, -1);
 }
@@ -37,16 +35,14 @@ TEST(tests_determinant, correct_arg_4) {
 }
 
 TEST(tests_determinant, correct_arg_5) {
-  S21Matrix matrix(5, 5);
-  matrix.Assign({6, -2, -1, 5,  667, 3,  -5, -9, -7, 7, 15, 35, 0,
-                 0, -4, 0,  -1, -11, -2, -1, -2, -2, 3, 0,  -2});
+  S21Matrix matrix(5, 5, {6, -2, -1, 5,  667, 3,  -5, -9, -7, 7, 15, 35, 0,
+                          0, -4, 0,  -1, -11, -2, -1, -2, -2, 3, 0,  -2});
   double result = matrix.Determinant();
   EXPECT_DOUBLE_EQ(result, 2028624);
 }
 
 TEST(tests_determinant, correct_arg_6) {
-  S21Matrix matrix(3, 3);
-  matrix.Assign({2, 3, 1, 7, 4, 1, 9, -2, 1});
+  S21Matrix matrix(3, 3, {2, 3, 1, 7, 4, 1, 9, -2, 1});
   double result = matrix.Determinant();
   EXPECT_DOUBLE_EQ(result, -32);
 }
@@ -59,11 +55,10 @@ TEST(tests_determinant, correct_arg_7) {
 }
 
 TEST(tests_determinant, correct_arg_8) {
-  S21Matrix matrix(8, 8);
-  matrix.Assign({2, 8, 7, 4, 1, 8, 3, 9, 4, 2, 6, 2, 2, 1, 5, 8,
-                 8, 6, 7, 7, 3, 4, 4, 1, 1, 7, 0, 4, 4, 3, 0, 5,
-                 5, 7, 5, 6, 8, 3, 1, 9, 3, 7, 8, 0, 5, 7, 0, 2,
-                 5, 8, 3, 5, 9, 1, 2, 0, 7, 8, 7, 4, 7, 9, 1, 5});
+  S21Matrix matrix(
+      8, 8, {2, 8, 7, 4, 1, 8, 3, 9, 4, 2, 6, 2, 2, 1, 5, 8, 8, 6, 7, 7, 3, 4,
+             4, 1, 1, 7, 0, 4, 4, 3, 0, 5, 5, 7, 5, 6, 8, 3, 1, 9, 3, 7, 8, 0,
+             5, 7, 0, 2, 5, 8, 3, 5, 9, 1, 2, 0, 7, 8, 7, 4, 7, 9, 1, 5});
   double result = matrix.Determinant();
   EXPECT_DOUBLE_EQ(result, -616458);
 }
@@ -76,68 +71,59 @@ TEST(tests_determinant, correct_arg_9) {
 }
 
 TEST(tests_determinant, correct_arg_10) {
-  S21Matrix matrix(3, 3);
-  matrix.Assign({0.25, 1.25, 2.25, 3.25, 10, 5.25, 6.25, 7.25, 8.25});
+  S21Matrix matrix(3, 3, {0.25, 1.25, 2.25, 3.25, 10, 5.25, 6.25, 7.25, 8.25});
   double result = matrix.Determinant();
   EXPECT_DOUBLE_EQ(result, -69);
 }
 
 TEST(tests_determinant, correct_arg_11) {
-  S21Matrix matrix(3, 3);
-  matrix.Assign({2, 4, -6, -5, -7, 5, 3, 5, -6});
+  S21Matrix matrix(3, 3, {2, 4, -6, -5, -7, 5, 3, 5, -6});
   double result = matrix.Determinant();
   EXPECT_DOUBLE_EQ(result, -2);
 }
 
 TEST(tests_determinant, correct_arg_12) {
-  S21Matrix matrix(3, 3);
-  matrix.Assign({-3, 4, -6, 2, -7, 5, -4, 5, -6});
+  S21Matrix matrix(3, 3, {-3, 4, -6, 2, -7, 5, -4, 5, -6});
   double result = matrix.Determinant();
   EXPECT_DOUBLE_EQ(result, 25);
 }
 
 TEST(tests_determinant, correct_arg_13) {
-  S21Matrix matrix(3, 3);
-  matrix.Assign({-3, 2, -6, 2, -5, 5, -4, 3, -6});
+  S21Matrix matrix(3, 3, {-3, 2, -6, 2, -5, 5, -4, 3, -6});
   double result = matrix.Determinant();
   EXPECT_DOUBLE_EQ(result, 23);
 }
 
 TEST(tests_determinant, correct_arg_14) {
-  S21Matrix matrix(3, 3);
-  matrix.Assign({-3, 2, 4, 2, -5, -7, -4, 3, 5});
+  S21Matrix matrix(3, 3, {-3, 2, 4, 2, -5, -7, -4, 3, 5});
   double result = matrix.Determinant();
   EXPECT_DOUBLE_EQ(result, -8);
 }
 
 TEST(tests_determinant, correct_arg_15) {
-  S21Matrix matrix(4, 4);
-  matrix.Assign({3, -3, -5, 8, -3, 2, 4, -6, 2, -5, -7, 5, -4, 3, 5, -6});
+  S21Matrix matrix(4, 4,
+                   {3, -3, -5, 8, -3, 2, 4, -6, 2, -5, -7, 5, -4, 3, 5, -6});
   double result = matrix.Determinant();
   EXPECT_DOUBLE_EQ(result, 18);
 }
 
 TEST(tests_determinant, correct_arg_16) {
-  S21Matrix matrix(5, 5);
-  matrix.Assign({0.25, 1.25, 2.25, 3.25, 2.25, 3.25, 10,   5.25, 5.25,
-                 5.25, 6.25, 7.25, 8.25, 6.25, 6.25, 6.25, 7.25, 8.25,
-                 6.25, 7.25, 6.25, 7.25, 8.25, 6,    8.25});
+  S21Matrix matrix(5, 5, {0.25, 1.25, 2.25, 3.25, 2.25, 3.25, 10,   5.25, 5.25,
+                          5.25, 6.25, 7.25, 8.25, 6.25, 6.25, 6.25, 7.25, 8.25,
+                          6.25, 7.25, 6.25, 7.25, 8.25, 6,    8.25});
   double result = matrix.Determinant();
   EXPECT_DOUBLE_EQ(result, -69.0 / 4.00);
 }
 
 TEST(tests_determinant, correct_arg_17) {
-  S21Matrix matrix(4, 4);
-  matrix.Assign({1, 2, 3, 13, 4, 5, 6, 16, 7, 8, 90, 19, 1, 7, 7, 17});
+  S21Matrix matrix(4, 4, {1, 2, 3, 13, 4, 5, 6, 16, 7, 8, 90, 19, 1, 7, 7, 17});
   double result = matrix.Determinant();
   EXPECT_DOUBLE_EQ(result, 13608);
 }
 
 TEST(tests_determinant, correct_arg_18) {
-  S21Matrix matrix(3, 3);
-  matrix.Assign({0.32, 0.89, 0.64, 0.09, 0.72, 0.29, 0.83, 0.09, 0.12
-
-  });
+  S21Matrix matrix(3, 3,
+                   {0.32, 0.89, 0.64, 0.09, 0.72, 0.29, 0.83, 0.09, 0.12});
   double result = matrix.Determinant();
   EXPECT_DOUBLE_EQ(result, -0.153373);
 }

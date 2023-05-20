@@ -1,11 +1,10 @@
 #include "tests.h"
 
 TEST(tests_operators_assign, correct_arg) {
-  S21Matrix matrix_1(3, 6);
+  S21Matrix matrix_1(3, 6, {234.32423, 234234.432, 3, 324, 23432, 0, -345345,
+                            234.32423, 234234.432, 3, 324, 23432, 0, -345345,
+                            234.32423, 234234.432, 3, 324, 23432, 0, -345345});
   S21Matrix matrix_2(3, 6);
-  matrix_1.Assign({234.32423, 234234.432, 3, 324, 23432, 0, -345345,
-                   234.32423, 234234.432, 3, 324, 23432, 0, -345345,
-                   234.32423, 234234.432, 3, 324, 23432, 0, -345345});
   matrix_2 = matrix_1;
   EXPECT_TRUE(matrix_1.EqMatrix(matrix_2));
   EXPECT_TRUE(matrix_2.EqMatrix(matrix_1));
@@ -59,10 +58,9 @@ TEST(tests_operators_assign, correct_arg_7) {
 }
 
 TEST(tests_operators_assign, correct_arg_8) {
-  S21Matrix matrix_1(3, 3);
+  S21Matrix matrix_1(3, 3,
+                     {0.25, 1.25, 2.25, 3.25, 4.25, 5.25, 6.25, 7.25, 8.25});
   S21Matrix matrix_2(3, 3);
-
-  matrix_1.Assign({0.25, 1.25, 2.25, 3.25, 4.25, 5.25, 6.25, 7.25, 8.25});
   matrix_2 = matrix_1;
   EXPECT_TRUE(matrix_1.EqMatrix(matrix_2));
   EXPECT_TRUE(matrix_2.EqMatrix(matrix_1));
@@ -71,11 +69,9 @@ TEST(tests_operators_assign, correct_arg_8) {
 }
 
 TEST(tests_operators_assign, correct_arg_9) {
-  S21Matrix matrix_1(3, 3);
-  S21Matrix matrix_2(3, 3);
-
-  matrix_1.Assign({0.25, 1.25, 2.25, 3.25, 4.25, 5.25, 6.25, 7.25, 8.25});
-  matrix_2.Assign({0.25, 1.25, 2.25, 3.25, 4.25});
+  S21Matrix matrix_1(3, 3,
+                     {0.25, 1.25, 2.25, 3.25, 4.25, 5.25, 6.25, 7.25, 8.25});
+  S21Matrix matrix_2(3, 3, {0.25, 1.25, 2.25, 3.25, 4.25});
   EXPECT_FALSE(matrix_1.EqMatrix(matrix_2));
   EXPECT_FALSE(matrix_2.EqMatrix(matrix_1));
   EXPECT_TRUE(matrix_1.EqMatrix(matrix_1));
@@ -92,11 +88,10 @@ TEST(tests_operators_assign, correct_arg_10) {
 }
 
 TEST(tests_operators_assign, uncorrect_arg) {
-  S21Matrix matrix_1(3, 6);
+  S21Matrix matrix_1(3, 6, {234.32423, 234234.432, 3, 324, 23432, 0, -345345,
+                            234.32423, 234234.432, 3, 324, 23432, 0, -345345,
+                            234.32423, 234234.432, 3, 324, 23432, 0, -345345});
   S21Matrix matrix_2;
-  matrix_1.Assign({234.32423, 234234.432, 3, 324, 23432, 0, -345345,
-                   234.32423, 234234.432, 3, 324, 23432, 0, -345345,
-                   234.32423, 234234.432, 3, 324, 23432, 0, -345345});
   EXPECT_FALSE(matrix_1.EqMatrix(matrix_2));
 }
 
@@ -107,14 +102,14 @@ TEST(tests_operators_assign, uncorrect_arg_2) {
 }
 
 TEST(tests_operators_assign, few_correct_arg) {
-  S21Matrix matrix_1(3, 6);
-  S21Matrix matrix_2(3, 6);
-  matrix_1.Assign({234.32423, 234234.432, 3, 324, 23432, 0, -345345, 234.32423,
-                   234234.432, 3, 324, 23432, 0, -345345, 234.32423,
-                   234234.432});
-  matrix_2.Assign({234.32423, 234234.432, 3, 324, 23432, 0, -345345, 234.32423,
-                   234234.432, 3, 324, 23432, 0, -345345, 234.32423,
-                   234234.432});
+  S21Matrix matrix_1(
+      3, 6,
+      {234.32423, 234234.432, 3, 324, 23432, 0, -345345, 234.32423, 234234.432,
+       3, 324, 23432, 0, -345345, 234.32423, 234234.432});
+  S21Matrix matrix_2(
+      3, 6,
+      {234.32423, 234234.432, 3, 324, 23432, 0, -345345, 234.32423, 234234.432,
+       3, 324, 23432, 0, -345345, 234.32423, 234234.432});
   EXPECT_TRUE(matrix_1.EqMatrix(matrix_2));
   EXPECT_TRUE(matrix_2.EqMatrix(matrix_1));
   EXPECT_TRUE(matrix_2.EqMatrix(matrix_2));

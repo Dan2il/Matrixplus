@@ -10,7 +10,6 @@ TEST(tests_constuctors, simple_argument) {
   S21Matrix matrix(5, 25);
   EXPECT_DOUBLE_EQ(matrix.GetCols(), 25);
   EXPECT_DOUBLE_EQ(matrix.GetRows(), 5);
-
   CheckMatrix(0, matrix);
 }
 
@@ -18,7 +17,6 @@ TEST(tests_constuctors, simple_argument_2) {
   S21Matrix matrix(2, 2);
   EXPECT_DOUBLE_EQ(matrix.GetCols(), 2);
   EXPECT_DOUBLE_EQ(matrix.GetRows(), 2);
-
   CheckMatrix(0, matrix);
 }
 
@@ -52,27 +50,22 @@ TEST(tests_constuctors, copy_constructor) {
   S21Matrix matrix(other);
   EXPECT_DOUBLE_EQ(matrix.GetRows(), 5);
   EXPECT_DOUBLE_EQ(matrix.GetCols(), 6);
-
   CheckMatrix(0, matrix);
-
   EXPECT_TRUE(matrix.EqMatrix(other));
   EXPECT_TRUE(other.EqMatrix(matrix));
 }
 
 TEST(tests_constuctors, copy_constructor_2) {
-  S21Matrix other(3, 3);
-  other.Assign({1, 2, 3, 4, 5, 6, 7, 8, 9});
+  S21Matrix other(3, 3, {1, 2, 3, 4, 5, 6, 7, 8, 9});
   S21Matrix matrix(other);
   EXPECT_DOUBLE_EQ(matrix.GetRows(), 3);
   EXPECT_DOUBLE_EQ(matrix.GetCols(), 3);
-
   EXPECT_TRUE(matrix.EqMatrix(other));
   EXPECT_TRUE(other.EqMatrix(matrix));
 }
 
 TEST(tests_constuctors, copy_constructor_3) {
-  S21Matrix matrix1(2, 2);
-  matrix1.Assign({1, 2, 3, 4});
+  S21Matrix matrix1(2, 2, {1, 2, 3, 4});
   S21Matrix matrix2(matrix1);
   EXPECT_EQ(matrix2.GetRows(), 2);
   EXPECT_EQ(matrix2.GetCols(), 2);
@@ -85,14 +78,13 @@ TEST(tests_constuctors, copy_constructor_3) {
 }
 
 TEST(tests_constuctors, move_constructor) {
-  S21Matrix matrix1(2, 2);
-  matrix1.Assign({1, 2, 3, 4});
+  S21Matrix matrix1(2, 2, {1, 2, 3, 4});
   S21Matrix matrix2(matrix1);
   S21Matrix matrix3(std::move(matrix1));
   EXPECT_EQ(matrix3.GetRows(), 2);
   EXPECT_EQ(matrix3.GetCols(), 2);
-  EXPECT_EQ(matrix1.GetRows(), 0);
-  EXPECT_EQ(matrix1.GetCols(), 0);
+  EXPECT_EQ(matrix1.GetRows(), 1);
+  EXPECT_EQ(matrix1.GetCols(), 1);
   EXPECT_EQ(matrix3.EqMatrix(matrix2), true);
   for (int i = 0; i < matrix3.GetRows(); i++) {
     for (int j = 0; j < matrix3.GetCols(); j++) {

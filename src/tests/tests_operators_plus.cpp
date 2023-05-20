@@ -2,8 +2,8 @@
 
 TEST(tests_operators_plus, correct_arg) {
   S21Matrix matrix_1(3, 6);
-  S21Matrix matrix_2(3, 6);
-  matrix_2.Assign({1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1});
+  S21Matrix matrix_2(3, 6,
+                     {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1});
   {
     S21Matrix result = matrix_1 + matrix_2;
     EXPECT_TRUE(result.EqMatrix(matrix_2));
@@ -67,12 +67,11 @@ TEST(tests_operators_plus, correct_arg_3) {
 }
 
 TEST(tests_operators_plus, correct_arg_4) {
-  S21Matrix matrix_1(3, 3);
-  S21Matrix matrix_2(3, 3);
+  S21Matrix matrix_1(3, 3,
+                     {0.25, 1.25, 2.25, 3.25, 4.25, 5.25, 6.25, 7.25, 8.25});
+  S21Matrix matrix_2(3, 3,
+                     {9.65, 8.65, 7.65, 6.65, 5.65, 4.65, 3.65, 2.65, 1.65});
   S21Matrix answer(3, 3);
-
-  matrix_1.Assign({0.25, 1.25, 2.25, 3.25, 4.25, 5.25, 6.25, 7.25, 8.25});
-  matrix_2.Assign({9.65, 8.65, 7.65, 6.65, 5.65, 4.65, 3.65, 2.65, 1.65});
   answer.Assign(9.9);
   {
     S21Matrix result = matrix_1 + matrix_2;
@@ -88,8 +87,8 @@ TEST(tests_operators_plus, correct_arg_4) {
 
 TEST(tests_operators_plus, uncorrect_matrix) {
   S21Matrix matrix_1(6, 3);
-  S21Matrix matrix_2(3, 6);
-  matrix_2.Assign({1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1});
+  S21Matrix matrix_2(3, 6,
+                     {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1});
   EXPECT_ANY_THROW(S21Matrix result = matrix_1 + matrix_2);
   EXPECT_ANY_THROW(matrix_1 += matrix_2);
 }
