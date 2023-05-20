@@ -29,6 +29,6 @@ S21Matrix::S21Matrix(S21Matrix&& other)
     : rows_(other.GetRows()),
       cols_(other.GetCols()),
       matrix_(std::move(other.matrix_)) {
-  other.SetCols(0);
-  other.SetRows(0);
+  other.SetCols(1);
+  other.SetRows(1);
 }

@@ -5,10 +5,12 @@ int S21Matrix::GetCols() const { return cols_; }
 
 void S21Matrix::SetRows(const int rows) {
   rows_ = rows;
+  CheckCorrectRowsAndCols();
   matrix_.resize(rows_);
 }
 void S21Matrix::SetCols(const int cols) {
   cols_ = cols;
+  CheckCorrectRowsAndCols();
   for (std::vector<double> row : matrix_) {
     row.resize(cols_);
   }
