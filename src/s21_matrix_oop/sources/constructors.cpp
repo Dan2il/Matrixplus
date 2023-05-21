@@ -10,7 +10,8 @@ S21Matrix::S21Matrix(const int rows, const int cols)
   std::swap(matrix_, matrix);
 }
 
-S21Matrix::S21Matrix(const int rows, const int cols, std::vector<double> data)
+S21Matrix::S21Matrix(const int rows, const int cols,
+                     const std::vector<double> data)
     : rows_(rows), cols_(cols) {
   CheckCorrectRowsAndCols();
   Assign(data);

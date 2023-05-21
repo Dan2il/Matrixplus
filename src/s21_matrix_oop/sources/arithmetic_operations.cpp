@@ -25,7 +25,11 @@ void S21Matrix::MulNumber(const double num) {
 }
 
 void S21Matrix::MulMatrix(const S21Matrix& other) {
-  if (cols_ == other.GetRows()) {
+  if (cols_ != other.GetRows()) {
+    throw std::invalid_argument(
+        "The number of columns of the first matrix is not equal to the "
+        "number of rows of the second matrix");
+  } else {
     std::vector<std::vector<double>> matrix_buf(matrix_);
     cols_ = other.GetCols();
     for (int index_row = 0; index_row < rows_; ++index_row) {
@@ -39,10 +43,5 @@ void S21Matrix::MulMatrix(const S21Matrix& other) {
       }
       return num;
     });
-    std::cout << "for finish" << std::endl;
-  } else {
-    throw std::invalid_argument(
-        "The number of columns of the first matrix is not equal to the "
-        "number of rows of the second matrix");
   }
 }

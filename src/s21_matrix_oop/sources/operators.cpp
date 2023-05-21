@@ -8,11 +8,11 @@ double S21Matrix::operator()(const size_t i, const size_t j) const {
   return matrix_.at(i).at(j);
 }
 
-std::vector<double> S21Matrix::operator[](size_t num) {
+std::vector<double> S21Matrix::operator[](const size_t num) {
   return matrix_.at(num);
 }
 
-const std::vector<double> S21Matrix::operator[](size_t num) const {
+const std::vector<double> S21Matrix::operator[](const size_t num) const {
   return matrix_.at(num);
 }
 
@@ -20,13 +20,9 @@ void S21Matrix::operator=(const S21Matrix& matrix) {
   if (!(matrix == *this)) {
     SetRows(matrix.GetRows());
     SetCols(matrix.GetCols());
-
-    for (size_t index_row = 0; index_row < matrix_.size(); ++index_row) {
-      for (size_t index_col = 0; index_col < matrix_.at(index_row).size();
-           ++index_col) {
-        matrix_.at(index_row).at(index_col) = matrix(index_row, index_col);
-      }
-    }
+    ForEachMatrix([matrix](int index_row, int index_col) {
+      return matrix(index_row, index_col);
+    });
   }
 }
 
