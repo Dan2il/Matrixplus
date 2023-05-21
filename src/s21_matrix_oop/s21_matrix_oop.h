@@ -12,7 +12,7 @@ class S21Matrix {
  public:
   S21Matrix();
   explicit S21Matrix(const int rows, const int cols);
-  S21Matrix(const int rows, const int cols, const std::vector<double> data);
+  S21Matrix(const int rows, const int cols, const std::vector<double>& data);
   S21Matrix(const S21Matrix& other);
   S21Matrix(S21Matrix&& other);
 
@@ -68,8 +68,8 @@ class S21Matrix {
   void operator*=(const S21Matrix& matrix);
   void operator*=(const double num);
 
-  bool operator==(const S21Matrix matrix);
-  bool operator==(const S21Matrix matrix) const;
+  bool operator==(const S21Matrix& matrix);
+  bool operator==(const S21Matrix& matrix) const;
 
   ~S21Matrix() = default;
 
@@ -95,7 +95,7 @@ void S21Matrix::ForEachMatrix(Function func) {
   struct Indexs {
     int col_begin;
     int col_end;
-    Indexs operator++(int) { return Indexs{col_begin++, col_end--}; }
+    Indexs operator++() { return Indexs{++col_begin, --col_end}; }
   };
 
   for (int index_row = 0; index_row < mat.GetRows(); ++index_row) {
@@ -104,7 +104,7 @@ void S21Matrix::ForEachMatrix(Function func) {
       mat.Assign(index_row, indexs.col_begin,
                  func(index_row, indexs.col_begin));
       mat.Assign(index_row, indexs.col_end, func(index_row, indexs.col_end));
-      indexs++;
+      ++indexs;
     }
     if (indexs.col_begin == indexs.col_end) {
       mat.Assign(index_row, indexs.col_begin,

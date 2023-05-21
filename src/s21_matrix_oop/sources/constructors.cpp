@@ -11,7 +11,7 @@ S21Matrix::S21Matrix(const int rows, const int cols)
 }
 
 S21Matrix::S21Matrix(const int rows, const int cols,
-                     const std::vector<double> data)
+                     const std::vector<double>& data)
     : rows_(rows), cols_(cols) {
   CheckCorrectRowsAndCols();
   Assign(data);

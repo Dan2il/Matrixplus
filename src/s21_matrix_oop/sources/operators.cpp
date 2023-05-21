@@ -62,7 +62,7 @@ void S21Matrix::operator*=(const S21Matrix& matrix) { MulMatrix(matrix); }
 
 void S21Matrix::operator*=(const double num) { MulNumber(num); }
 
-bool S21Matrix::operator==(const S21Matrix matrix) { return EqMatrix(matrix); }
-bool S21Matrix::operator==(const S21Matrix matrix) const {
+bool S21Matrix::operator==(const S21Matrix& matrix) { return EqMatrix(matrix); }
+bool S21Matrix::operator==(const S21Matrix& matrix) const {
   return EqMatrix(matrix);
 }
