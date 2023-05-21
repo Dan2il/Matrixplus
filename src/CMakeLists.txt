@@ -48,6 +48,7 @@ add_executable(
     tests/tests_operators_mul.cpp
     tests/tests_operators_eq.cpp
     tests/tests_operators_assign.cpp
+    tests/tests_methods_inversematrix.cpp
     tests/tests.h
 )
 
